@@ -1,0 +1,222 @@
+openapi: 3.0.3
+info:
+  title: Boutique Hotel Technikum
+  version: 0.0.1
+servers:
+  - url: http://localhost/api/v1
+tags:
+  - name: Rooms
+    description: Everything about Rooms
+  - name: Bookings
+
+paths:
+  /rooms:
+    get:
+      tags:
+        - Rooms
+      summary: Get all rooms
+      description: Get all rooms
+      operationId: getRooms
+      parameters:
+        - name: availabilityPeriod
+          in: query
+          schema:
+            $ref: '#/components/schemas/Period'
+          description: The period to search for available rooms if not set all rooms will be listed independent from their availability.
+        - name: page
+          in: query
+          description: The page number of items to start with (see limit)
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+            example: 1
+        - name: limit
+          in: query
+          description: The number of items to return
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+            default: 5
+            example: 5
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomsList'
+  /bookings:
+    post:
+      tags:
+        - Bookings
+      summary: Create booking
+      description: Create booking
+      operationId: createBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingResponse'
+        '422':
+          description: Validation exception
+
+components:
+  schemas:
+    Room:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Room 22"
+        description:
+          type: string
+          example: "Nice room facing south"
+        extras:
+          type: string
+          enum:
+            - SEE_VIEW
+            - KING_SIZE_BED
+            - REDUCED_MOBILITY
+            - BALCONY
+        address:
+          type: string
+          example: "Place du Casino, 98000 Monaco"
+        position:
+          $ref: '#/components/schemas/Coordinate'
+        directions:
+          type: string
+          example: "Luxurious suite with a panoramic view of the city"
+        contactPhoneNumber:
+          type: string
+          example: "+377987654321"
+      required:
+        - title
+        - description
+        - address
+        - position
+        - directions
+    RoomResponse:
+      properties:
+        id:
+          type: string
+          format: UUID
+          example: "28cdaf9d-d1b7-4832-b29c-4cfe021cd329"
+      required:
+        - id
+      allOf:
+        - $ref: '#/components/schemas/Room'
+        - type: object
+    
+    RoomsList:
+      type: object
+      properties:
+        period:
+          $ref: '#/components/schemas/Period'
+        availableRooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoomResponse'
+        pageNumber:
+          type: integer
+          example: 1
+        numberOfElements:
+          type: integer
+          example: 5
+      required:
+        - period
+        - availableRooms
+        - pageNumber
+    
+    Booking:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/User'
+        breakfast:
+          type: boolean
+          example: true
+        roomId:
+          type: string
+          format: UUID
+          example: "28cdaf9d-d1b7-4832-b29c-4cfe021cd329"
+        reservationPeriod:
+          $ref: '#/components/schemas/Period'
+      required:
+        - customer
+        - breakfast
+        - roomId
+        - reservationPeriod
+
+    BookingResponse:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/User'
+        breakfast:
+          type: boolean
+          example: true
+        room:
+          $ref: '#/components/schemas/RoomResponse'
+        reservationPeriod:
+          $ref: '#/components/schemas/Period'
+      required:
+        - customer
+        - breakfast
+        - room
+        - reservationPeriod
+
+    Period:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date
+          example: "2017-07-21"
+        end:
+          type: string
+          format: date
+          example: "2017-07-21"
+      required:
+        - start
+        - end
+
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Max"
+        surname:
+          type: string
+          example: "Muster"
+        e-mail:
+          type: string
+          format: email
+          example: max.muster@email.com
+      required:
+        - name
+        - surname
+        - e-mail    
+
+    Coordinate:
+      type: object
+      properties:
+        latitude:
+          type: number
+          example: 43.7399
+        longitude:
+          type: number
+          example: 7.4316
+      required:
+        - latitude
+        - longitude
