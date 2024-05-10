@@ -25,22 +25,22 @@ Lage: Inmitten der Großstadt Wien, thront das Boutique-Hotel-Technikum Nähe de
 
 Architektur: Die moderne Architektur des Hotels fügt sich harmonisch in die Innenstadt ein. Großzügige Glasfronten erlauben eine atemberaubende Aussicht auf die gesamte Skyline der Großstadt.
 
-Zimmer: Die luxuriösen Zimmer und Suiten des Hotels Sternenhimmel bieten höchsten Komfort und Eleganz. Ausgestattet mit hochwertigen Materialien und modernen Annehmlichkeiten garantieren sie einen unvergesslichen Aufenthalt. Alle Zimmer verfügen über einen Balkon oder eine Terasse mit Panoramablick auf die Stadt.
+Zimmer: Die luxuriösen Zimmer und Suiten des Hotels Sternenhimmel bieten höchsten Komfort und Eleganz. Ausgestattet mit hochwertigen Materialien und modernen Annehmlichkeiten garantieren sie einen unvergesslichen Aufenthalt. Alle Zimmer verfügen über einen Balkon oder eine Terrasse mit Panoramablick auf die Stadt.
 
 Ausstattung: Das Boutique-Hotel-Technikum bietet seinen Gästen eine Vielzahl von Annehmlichkeiten und Aktivitäten. Dazu gehören:
-- Ein Infinity-Pool mit atemberaubendem Blick
-- Ein Spa-Bereich mit vielfältigen Anwendungen und Massagen
-- Ein Fitnesscenter mit modernsten Geräten und personal Trainer
+- Infinity-Pool mit atemberaubendem Blick
+- Spa-Bereich mit vielfältigen Anwendungen und Massagen
+- Fitnesscenter mit modernsten Geräten
 - Zwei Restaurants mit gehobener Küche
-- Eine Bar mit einer großen Auswahl an Cocktails und Getränken
-- Eine Lounge mit Kamin und Bibliothek
-- Ein Geschäft mit Souvenirs und regionalen Produkten
+- Bar mit großer Auswahl an Cocktails und Getränken
+- Lounge mit Kamin und Bibliothek
+- Geschäft mit Souvenirs und regionalen Produkten
 
 Aktivitäten: In der Umgebung des Boutique-Hotel-Technikum gibt es zahlreiche Möglichkeiten für Aktivitäten in der Innenstadt. Shoppen, der Besuch von Sehenswürdigkeiten wie den Stephansdom, die Hofburg, das Schloss Schönbrunn oder Museen sind nur einige der Aktivitäten, die Gäste genießen können. Das Hotel bietet auch geführte Städtetrips und andere Aktivitäten an.
 
 Zielgruppe: Das Hotel ist ideal geeignet für Gäste, die einen luxuriösen und erholsamen Urlaub in der Wiener Innenstadt suchen. Paare, Familien und Geschäftsreisende sind gleichermaßen willkommen.
 
-Preis: Die Preise für die Zimmer im Hotel Sternenhimmel variieren je nach Saison und Zimmerkategorie. In der Hauptsaison beginnen die Preise bei etwa 200 Euro pro Nacht.
+Preis: Die Preise für die Zimmer im Hotel Sternenhimmel variieren je nach Saison und Zimmerkategorie. In der Hauptsaison beginnen die Preise bei etwa 200 € pro Nacht.
 
 
 # Impressum

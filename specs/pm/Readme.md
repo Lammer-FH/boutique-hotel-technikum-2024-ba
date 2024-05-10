@@ -1,3 +1,6 @@
+# Source Control
+GithubFlow approach
+
 # Icons
 Icon-Library used: https://www.npmjs.com/package/bootstrap-icons-vue: 
 
