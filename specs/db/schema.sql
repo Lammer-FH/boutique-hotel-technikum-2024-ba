@@ -11,18 +11,6 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  room (
-    id INT unsigned auto_increment PRIMARY key,
-    hotel_id INT unsigned NOT NULL,
-    room_number SMALLINT unsigned NOT NULL,
-    title tinytext NOT NULL,
-    description text NOT NULL,
-    bed_amount tinyint unsigned NOT NULL,
-    price tinyint unsigned NOT NULL
-    CONSTRAINT room_hotel_id_fk FOREIGN key (hotel_id) REFERENCES hotel (id)
-  );
-
-CREATE TABLE
   hotel (
     id INT unsigned auto_increment PRIMARY key,
     name tinytext NOT NULL,
@@ -34,13 +22,25 @@ CREATE TABLE
   );
 
 CREATE TABLE
+  room (
+    id INT unsigned auto_increment PRIMARY key,
+    hotel_id INT unsigned NOT NULL,
+    room_number SMALLINT unsigned NOT NULL,
+    title tinytext NOT NULL,
+    description text NOT NULL,
+    bed_amount tinyint unsigned NOT NULL,
+    price tinyint unsigned NOT NULL,
+    CONSTRAINT room_hotel_id_fk FOREIGN key (hotel_id) REFERENCES hotel (id)
+  );
+
+CREATE TABLE
   customer (
     id INT unsigned auto_increment PRIMARY key,
     first_name tinytext NOT NULL,
     second_name tinytext NOT NULL,
     email tinytext NOT NULL,
     birth_date DATE NOT NULL
-  )
+  );
 
 CREATE TABLE
   booking (
@@ -50,7 +50,7 @@ CREATE TABLE
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     room_id INT unsigned NOT NULL,
-    CONSTRAINT booking_room_id_fk FOREIGN key (room_id) REFERENCES room (id)
+    CONSTRAINT booking_room_id_fk FOREIGN key (room_id) REFERENCES room (id),
     CONSTRAINT booking_customer_id_fk FOREIGN key (customer_id) REFERENCES customer (id)
   );
 
