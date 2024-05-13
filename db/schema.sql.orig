@@ -5,6 +5,16 @@ USE boutique_hotel;
 CREATE TABLE
   extra (
     id SMALLINT unsigned auto_increment PRIMARY key,
+<<<<<<< HEAD
+    type tinytext NOT NULL
+  );
+
+CREATE TABLE
+  room (
+    id INT unsigned auto_increment PRIMARY key,
+    title tinytext NOT NULL,
+    description text NOT NULL,
+=======
     name tinytext NOT NULL,
     description tinytext NOT NULL,
     icon_name tinytext NOT NULL
@@ -14,6 +24,7 @@ CREATE TABLE
   hotel (
     id INT unsigned auto_increment PRIMARY key,
     name tinytext NOT NULL,
+>>>>>>> 37bfc2366472dbadf1f3057567c006e8b8689b47
     address tinytext NOT NULL,
     latitude FLOAT (10, 6) NOT NULL,
     longitude FLOAT (10, 6) NOT NULL,
@@ -22,6 +33,18 @@ CREATE TABLE
   );
 
 CREATE TABLE
+<<<<<<< HEAD
+  booking (
+    id INT unsigned auto_increment PRIMARY key,
+    customer_name tinytext NOT NULL,
+    customer_surname tinytext NOT NULL,
+    customer_email tinytext NOT NULL,
+    breakfast tinyint (1) NOT NULL,
+    START DATE NOT NULL,
+    END DATE NOT NULL,
+    room_id INT unsigned NOT NULL,
+    CONSTRAINT booking_room_id_fk FOREIGN key (room_id) REFERENCES room (id)
+=======
   room (
     id INT unsigned auto_increment PRIMARY key,
     hotel_id INT unsigned NOT NULL,
@@ -52,6 +75,7 @@ CREATE TABLE
     room_id INT unsigned NOT NULL,
     CONSTRAINT booking_room_id_fk FOREIGN key (room_id) REFERENCES room (id),
     CONSTRAINT booking_customer_id_fk FOREIGN key (customer_id) REFERENCES customer (id)
+>>>>>>> 37bfc2366472dbadf1f3057567c006e8b8689b47
   );
 
 CREATE TABLE
