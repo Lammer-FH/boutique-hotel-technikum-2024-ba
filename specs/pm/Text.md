@@ -1,5 +1,5 @@
 # General
-The texts used for the app are created with the help of AI, Gemini version 1.0 Pro! Howere the text was largely adapted to fit together.
+The texts used for the app were created with the help of AI, Gemini version 1.0 Pro! However, the text was adapted to fit together and make sense.
 
 # Landing-Page
 Headline: Boutique-Hotel-Technikum
