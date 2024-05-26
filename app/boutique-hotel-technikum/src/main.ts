@@ -44,6 +44,7 @@ import '@ionic/vue/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import BoutiqueHeader from "@/components/UI/BoutiqueHeader.vue";
 
 const app = createApp(App)
   .use(IonicVue)
@@ -59,6 +60,8 @@ app.component("IonPage", IonPage)
     .component("IonGrid", IonGrid)
     .component("IonRow", IonRow)
     .component("IonCol", IonCol);
+
+app.component("BoutiqueHeader", BoutiqueHeader);
 
 router.isReady().then(() => {
   app.mount('#app');

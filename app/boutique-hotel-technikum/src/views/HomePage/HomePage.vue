@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Boutique Hotel Technikum</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <BoutiqueHeader title="Boutique Hotel Technikum"/>
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
@@ -42,6 +38,7 @@
 import HomePageCard from '@/components/HomePageCard.vue';
 import homeImage from '@/assets/img/Boutique-Hotel-Technikum-Croped.jpg'
 import HomePageCardText from "@/views/HomePage/HomePageCards";
+import BoutiqueHeader from "@/components/UI/BoutiqueHeader.vue";
 
 export default {
   data() {
@@ -50,6 +47,6 @@ export default {
       homePageCards: HomePageCardText
     }
   },
-  components: { HomePageCard }
+  components: {BoutiqueHeader, HomePageCard }
 }
 </script>

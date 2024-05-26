@@ -8,6 +8,11 @@
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
+        <ion-tab-button tab="search" href="/tabs/search">
+          <ion-icon aria-hidden="true" :icon="icons.search" />
+          <ion-label>Search</ion-label>
+        </ion-tab-button>
+
         <ion-tab-button tab="about" href="/tabs/about">
           <ion-icon aria-hidden="true" :icon="icons.informationCircle" />
           <ion-label>About</ion-label>
@@ -24,13 +29,13 @@
 
 <script lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonRouterOutlet } from '@ionic/vue';
-import { home, informationCircle, help } from 'ionicons/icons';
+import { home, informationCircle, help, search } from 'ionicons/icons';
 
 export default {
   data() {
     return {
       icons: {
-        home, informationCircle, help
+        home, informationCircle, help, search
       }
     }
   },
