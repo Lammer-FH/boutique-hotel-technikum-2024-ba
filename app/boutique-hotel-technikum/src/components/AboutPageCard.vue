@@ -5,17 +5,29 @@
         <ion-card-title>{{ title }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        {{ text }}
-        <slot></slot>
+        <template v-if="text">{{ text }}</template>
+        <slot v-else></slot>
     </ion-card-content>
     </ion-card>
   </ion-col>
 </template>
 
-<script setup lang="ts">
-import { IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCol } from '@ionic/vue';
-defineProps({
-  title: String,
-  text: String,
-});
+<script lang="ts">
+import { IonCard, IonCardHeader, IonCardContent, IonCardTitle } from '@ionic/vue';
+
+export default {
+  components: {
+    IonCard, IonCardHeader, IonCardContent, IonCardTitle
+  },
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    text: {
+      type: String,
+      required: false
+    }
+  }
+}
 </script>

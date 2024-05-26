@@ -14,7 +14,6 @@
         </ion-row>
 
         <ion-row>
-
           <AboutPageCard 
             title="Lage"
             text="Inmitten der Großstadt Wien, thront das Boutique-Hotel-Technikum Nähe des Stephansdoms im 3. Bezirk. Umgeben von Sehenswürdigkeiten und Shoppingmöglichkeiten der Wiener Innenstadt bietet es vielfältige Möglichkeiten den Tag zu genießen."
@@ -54,15 +53,19 @@
             title="Preis"
             text="Die Preise für die Zimmer variieren je nach Saison und Zimmerkategorie. In der Hauptsaison beginnen die Preise bei etwa 200 € pro Nacht."
           />
-
         </ion-row>
       </ion-grid>
     </ion-content>
   </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCol, IonRow, IonGrid } from '@ionic/vue';
+<script lang="ts">
+import { IonToolbar } from '@ionic/vue';
 import AboutPageCard from '@/components/AboutPageCard.vue';
 
+export default {
+  components: {
+    IonToolbar, AboutPageCard
+  }
+}
 </script>
