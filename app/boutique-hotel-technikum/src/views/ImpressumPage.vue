@@ -1,10 +1,7 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Impressum</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <BoutiqueHeader title="Impressum"/>
+
     <ion-content :fullscreen="true" class="ion-padding">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -62,8 +59,10 @@
 
 <script lang="ts">
 import { IonToolbar } from '@ionic/vue';
+import BoutiqueHeader from "@/components/UI/BoutiqueHeader.vue";
 export default {
   components: {
+    BoutiqueHeader,
     IonToolbar
   }
 }
