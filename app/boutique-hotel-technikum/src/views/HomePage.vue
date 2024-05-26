@@ -3,13 +3,9 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>Boutique Hotel Technikum</ion-title>
-        <ion-buttons slot="primary">
-        <ion-button>
-          <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
-        </ion-button>
-  </ion-buttons>
       </ion-toolbar>
     </ion-header>
+
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -62,12 +58,14 @@
           />
         </ion-row>
       </ion-grid>
-
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonImg, IonIcon } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonImg, IonIcon, IonButton, IonButtons, IonCol, IonRow, IonGrid } from '@ionic/vue';
+import { ellipsisHorizontal } from 'ionicons/icons';
+
+
 import HomePageCard from '@/components/HomePageCard.vue';
 </script>
