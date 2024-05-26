@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router';
 
 import {
+  IonButton,
   IonCol,
   IonContent,
   IonGrid,
@@ -59,7 +60,8 @@ app.component("IonPage", IonPage)
     .component("IonIcon", IonIcon)
     .component("IonGrid", IonGrid)
     .component("IonRow", IonRow)
-    .component("IonCol", IonCol);
+    .component("IonCol", IonCol)
+    .component("IonButton", IonButton);
 
 app.component("BoutiqueHeader", BoutiqueHeader);
 

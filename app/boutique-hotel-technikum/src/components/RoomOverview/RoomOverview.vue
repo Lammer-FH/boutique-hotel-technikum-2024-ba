@@ -1,23 +1,32 @@
 <template>
-  <ion-header>
-    <h1>{{ name }}</h1>
-
+  <div class="container">
+    <ion-header>
+      <h1>{{ name }}</h1>
+    </ion-header>
     <section>
+      <ImageDiaShow :images="images"></ImageDiaShow>
       <p>{{ description }}</p>
       <p>{{ `Betten: ${beds}` }}</p>
       <p>
         Extras:
-        <RoomExtras :extras="extras"/>
+        <RoomExtra v-for="{name, icon} in extras"
+                   :key="name"
+                   :icon="icon"
+                   :name="name" />
       </p>
-      <p>{{ formatMoney(price) }}</p>
+      <p class="money">{{ formatMoney(price) }}</p>
+      <ion-button>Verfügbarkeit prüfen</ion-button>
     </section>
-  </ion-header>
+  </div>
 </template>
 
 <script lang="ts">
 import {formatMoney} from "@/utils/Formatter";
+import RoomExtra, { Extra } from "@/components/RoomOverview/RoomExtra.vue";
+import ImageDiaShow, {SlideImageData} from "@/components/UI/ImageDiaShow.vue";
 
 export default {
+  components: {ImageDiaShow: ImageDiaShow, RoomExtra},
   methods: {formatMoney},
   props: {
     id: {
@@ -29,7 +38,7 @@ export default {
       required: true
     },
     images: {
-      type: Array,
+      type: Array<SlideImageData>,
       required: true
     },
     description: {
@@ -41,16 +50,34 @@ export default {
       required: true
     },
     extras: {
-      type: Array,
+      type: Array<Extra>,
       required: false
     },
     price: {
       type: Number,
       required: true
     }
-  },
-  data() {
-
   }
 }
 </script>
+
+<style scoped lang="scss">
+.container {
+  background-color: var(--ion-background-color-step-100);
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .money {
+    text-align: center;
+  }
+
+  ion-button {
+    width: 100%;
+  }
+}
+</style>
