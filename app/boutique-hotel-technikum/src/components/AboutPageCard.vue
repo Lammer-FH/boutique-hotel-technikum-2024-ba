@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import { IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCol } from '@ionic/vue';
 defineProps({
   title: String,
   text: String,

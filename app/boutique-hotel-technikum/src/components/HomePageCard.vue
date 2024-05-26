@@ -13,6 +13,8 @@
 </template>
 
 <script setup lang="ts">
+import { IonCol, IonImg, IonCardContent, IonCard } from '@ionic/vue';
+
 defineProps({
   imageSrc: String,
   imageAlt: String,
