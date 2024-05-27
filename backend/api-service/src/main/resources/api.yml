@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Boutique Hotel Technikum
-  version: 0.0.1
+  version: 0.0.2
 servers:
   - url: http://localhost/api/v1
 tags:
