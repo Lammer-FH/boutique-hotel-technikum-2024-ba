@@ -18,11 +18,6 @@ paths:
       description: Get all rooms
       operationId: getRooms
       parameters:
-        - name: availabilityPeriod
-          in: query
-          schema:
-            $ref: '#/components/schemas/Period'
-          description: The period to search for available rooms if not set all rooms will be listed independent from their availability.
         - name: startIndex
           in: query
           required: true
@@ -47,6 +42,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoomsList'
+
+  /rooms/availability:
+    get:
+      tags:
+        - Rooms
+      summary: Get all available rooms
+      description: Get all available rooms between two dates
+      operationId: getAvailableRooms
+      parameters:
+        - name: availabilityPeriod
+          in: query
+          schema:
+            $ref: '#/components/schemas/Period'
+          description: The period to search for available rooms if not set all rooms will be listed independent from their availability.
+          required: true
+        - name: startIndex
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+            example: 1
+        - name: limit
+          in: query
+          description: The number of items to return
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+            default: 5
+            example: 5
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomsList'
+
   /bookings:
     post:
       tags:
