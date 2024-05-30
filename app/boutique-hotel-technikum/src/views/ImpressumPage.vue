@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import { IonToolbar } from '@ionic/vue';
-import BoutiqueHeader from "@/components/UI/BoutiqueHeader.vue";
+import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 export default {
   components: {
     BoutiqueHeader,
