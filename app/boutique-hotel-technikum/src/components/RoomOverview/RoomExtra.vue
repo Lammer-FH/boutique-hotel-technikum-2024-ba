@@ -1,7 +1,7 @@
 <template>
   <li>
-    <ion-icon :name="icon"/>
-    {{ name }}
+      <ion-icon :name="icon"/>
+      {{ name }}
   </li>
 </template>
 
@@ -38,3 +38,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+li {
+  vertical-align: middle;
+}
+</style>

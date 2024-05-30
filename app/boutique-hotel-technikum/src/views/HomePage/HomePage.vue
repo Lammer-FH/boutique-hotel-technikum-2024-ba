@@ -38,7 +38,7 @@
 import HomePageCard from '@/components/HomePageCard.vue';
 import homeImage from '@/assets/img/Boutique-Hotel-Technikum-Croped.jpg'
 import HomePageCardText from "@/views/HomePage/HomePageCards";
-import BoutiqueHeader from "@/components/UI/BoutiqueHeader.vue";
+import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
 export default {
   data() {

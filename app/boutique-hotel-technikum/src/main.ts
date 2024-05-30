@@ -5,7 +5,7 @@ import router from './router';
 import {
   IonButton,
   IonCol,
-  IonContent,
+  IonContent, IonFooter,
   IonGrid,
   IonHeader, IonIcon,
   IonicVue,
@@ -45,7 +45,7 @@ import '@ionic/vue/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import BoutiqueHeader from "@/components/UI/BoutiqueHeader.vue";
+import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
 const app = createApp(App)
   .use(IonicVue)
@@ -53,6 +53,7 @@ const app = createApp(App)
 
 app.component("IonPage", IonPage)
     .component("IonHeader", IonHeader)
+    .component("IonFooter", IonFooter)
     .component("IonTitle", IonTitle)
     .component("IonContent", IonContent)
     .component("IonToolbar", IonToolbar)

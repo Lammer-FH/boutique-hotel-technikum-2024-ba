@@ -5,6 +5,10 @@
     <ion-content>
       <RoomOverview v-bind="rooms"/>
     </ion-content>
+
+    <ion-footer>
+      <RoomPageination :pages="10"/>
+    </ion-footer>
   </ion-page>
 </template>
 
@@ -14,9 +18,11 @@ import bathImage from "@/assets/img/penthouse/Bath.jpg";
 import bedImage from "@/assets/img/penthouse/Bed.jpg";
 import minibarImage from "@/assets/img/penthouse/Minibar.jpg";
 import toiletImage from "@/assets/img/penthouse/Toilet.jpg";
+import RoomPageination from "@/components/RoomOverview/RoomPageination.vue";
 
 export default {
   components: {
+    RoomPageination,
     RoomOverview
   },
   data() {
@@ -26,12 +32,12 @@ export default {
         name: "Penthouse Suite",
         images: [
           {
-            src: bathImage,
-            alt: "Wunderschönes Badezimmer mit Badewanne, Dusche und Whirlpool!"
-          },
-          {
             src: bedImage,
             alt: "Doppelbett mit hervorragender Aussicht auf die Innenstadt!"
+          },
+          {
+            src: bathImage,
+            alt: "Wunderschönes Badezimmer mit Badewanne, Dusche und Whirlpool!"
           },
           {
             src: minibarImage,
