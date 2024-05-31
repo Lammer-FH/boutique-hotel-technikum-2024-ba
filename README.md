@@ -55,4 +55,12 @@ Or run install on IntelliJ IDEA Maven tab
 docker-compose -f ./db/docker-compose-db.yaml up
 ```
 
+#### Override DB Config with ENV variables
+
+See -> [baeldung.com/intellij-idea-environment-variables](https://www.baeldung.com/intellij-idea-environment-variables)
+
+````
+SPRING_DATASOURCE_USERNAME=<username>;SPRING_DATASOURCE_PASSWORD=<password>
+```` 
+
 #### Run api-service

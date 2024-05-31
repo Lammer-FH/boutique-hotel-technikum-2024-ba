@@ -5,7 +5,7 @@ spring:
     password: SET_ME
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
+    open-in-view: true
