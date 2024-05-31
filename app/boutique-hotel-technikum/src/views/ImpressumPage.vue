@@ -60,6 +60,11 @@
   </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCol, IonRow, IonGrid } from '@ionic/vue';
+<script lang="ts">
+import { IonToolbar } from '@ionic/vue';
+export default {
+  components: {
+    IonToolbar
+  }
+}
 </script>

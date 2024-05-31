@@ -12,12 +12,27 @@
   </ion-col>
 </template>
 
-<script setup lang="ts">
-import { IonCol, IonImg, IonCardContent, IonCard } from '@ionic/vue';
+<script lang="ts">
+import { IonCardContent, IonCard } from '@ionic/vue';
 
-defineProps({
-  imageSrc: String,
-  imageAlt: String,
-  text: String
-});
+export default {
+  components: {
+    IonCardContent,
+    IonCard
+  },
+  props: {
+    imageSrc: {
+      type: String,
+      required: true
+    },
+    imageAlt: {
+      type: String,
+      required: true
+    },
+    text: {
+      type: String,
+      required: true
+    }
+  }
+}
 </script>

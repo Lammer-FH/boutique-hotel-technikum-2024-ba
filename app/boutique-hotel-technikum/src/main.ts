@@ -2,7 +2,18 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
 
-import { IonicVue } from '@ionic/vue';
+import {
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader, IonIcon,
+  IonicVue,
+  IonImg,
+  IonPage,
+  IonRow,
+  IonTitle,
+  IonToolbar
+} from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -37,6 +48,17 @@ import './theme/variables.css';
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+
+app.component("IonPage", IonPage)
+    .component("IonHeader", IonHeader)
+    .component("IonTitle", IonTitle)
+    .component("IonContent", IonContent)
+    .component("IonToolbar", IonToolbar)
+    .component("IonImg", IonImg)
+    .component("IonIcon", IonIcon)
+    .component("IonGrid", IonGrid)
+    .component("IonRow", IonRow)
+    .component("IonCol", IonCol);
 
 router.isReady().then(() => {
   app.mount('#app');

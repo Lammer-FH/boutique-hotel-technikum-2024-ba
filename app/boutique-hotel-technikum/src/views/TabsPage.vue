@@ -4,17 +4,17 @@
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="home" href="/tabs/home">
-          <ion-icon aria-hidden="true" :icon="home" />
+          <ion-icon aria-hidden="true" :icon="icons.home" />
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="about" href="/tabs/about">
-          <ion-icon aria-hidden="true" :icon="informationCircle" />
+          <ion-icon aria-hidden="true" :icon="icons.informationCircle" />
           <ion-label>About</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="impressum" href="/tabs/impressum">
-          <ion-icon aria-hidden="true" :icon="help" />
+          <ion-icon aria-hidden="true" :icon="icons.help" />
           <ion-label>Impressum</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
@@ -22,7 +22,20 @@
   </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
+<script lang="ts">
+import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonRouterOutlet } from '@ionic/vue';
 import { home, informationCircle, help } from 'ionicons/icons';
+
+export default {
+  data() {
+    return {
+      icons: {
+        home, informationCircle, help
+      }
+    }
+  },
+  components: {
+    IonTabBar, IonTabButton, IonTabs, IonLabel, IonRouterOutlet
+  }
+}
 </script>
