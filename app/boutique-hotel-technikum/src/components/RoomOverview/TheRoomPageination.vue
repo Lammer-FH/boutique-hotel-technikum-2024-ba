@@ -89,7 +89,7 @@ div {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 0.1rem;
   background-color: var(--ion-background-color-step-150);
 }
 
