@@ -1,10 +1,7 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>About</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <BoutiqueHeader title="About"/>
+
     <ion-content :fullscreen="true" >
       <ion-grid fixed>
         <ion-row>
