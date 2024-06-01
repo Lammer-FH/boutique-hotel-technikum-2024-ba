@@ -32,7 +32,6 @@ public class HotelEntity {
     @Column(nullable = false)
     private Float longitude;
 
-    @Lob
     @Column(nullable = false)
     private String directions;
 

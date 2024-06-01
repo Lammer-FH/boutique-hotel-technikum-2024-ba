@@ -35,7 +35,7 @@ public class RoomEntity {
     private String description;
 
     @Column(name = "bed_amount", nullable = false)
-    private Byte bedAmount;
+    private Integer bedAmount;
 
     @Column(nullable = false)
     private Integer price;
