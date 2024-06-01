@@ -4,17 +4,19 @@
 
 ## Setup
 
-### Install Node.js LTS
+### Frontend
+
+#### Install Node.js LTS
 
 https://nodejs.org/en (current version: 20.13.0)
 
-### Install Ionic CLI
+#### Install Ionic CLI
 
 ```
 npm install -g @ionic/cli
 ```
 
-### Install NPM packages
+#### Install NPM packages
 
 go to /app folder
 
@@ -23,8 +25,42 @@ cd app/boutique-hotel-technikum
 npm install
 ```
 
-### Run Ionic app
+#### Run Ionic app
 
 ```
 ionic serve
 ```
+
+### Backend
+
+#### Install
+
+##### Install Java 22
+
+##### Install Maven
+
+https://maven.apache.org/install.html or just use it only through IntelliJ IDEA
+
+#### Generate Open API code
+
+```
+mvn clean install
+```
+
+Or run install on IntelliJ IDEA Maven tab
+
+#### Run DB
+
+```
+docker-compose -f ./db/docker-compose-db.yaml up
+```
+
+#### Override DB Config with ENV variables
+
+See -> [baeldung.com/intellij-idea-environment-variables](https://www.baeldung.com/intellij-idea-environment-variables)
+
+````
+SPRING_DATASOURCE_USERNAME=<username>;SPRING_DATASOURCE_PASSWORD=<password>
+```` 
+
+#### Run api-service
