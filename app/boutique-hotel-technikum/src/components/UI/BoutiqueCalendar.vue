@@ -1,38 +1,48 @@
 <template>
   <teleport to="body">
-    <div @click="$emit('finished')">
+    <ion-page>
+      <ion-content @click="$emit('finished')">
+        <div class="center">
+          <ion-datetime
+              presentation="date"
+              :highlighted-dates="highlightedDates"
+              :readonly="true"
+              :year-values="yearValues"
+              :show-default-buttons="false"
+              @click.stop="">
+              <ion-buttons slot="buttons">
+                <ion-button color="primary" @click="$emit('finished')">Zurück</ion-button>
+              </ion-buttons>
+            </ion-datetime>
+          </div>
+        </ion-content>
 
-      <div>
-        <ion-datetime
-            presentation="date"
-            :highlighted-dates="highlightedDates"
-            :readonly="true"
-            :year-values="yearValues"
-            @click.stop="">
-        </ion-datetime>
+        <ion-footer>
+          <p>
+            <span class="day green">1</span>Verfügbar
+          </p>
 
-        <ion-text class="description">
-          <ion-text class="day green">1</ion-text>
-          Verfügbar für nächste Nacht<br>
+          <p>
+            <span class="day red">2</span>Nicht verfügbar
+          </p>
 
-          <ion-text class="day red">2</ion-text>
-          Nicht verfügbar
-          <ion-button color="primary" @click="$emit('finished')">Zurück</ion-button>
-        </ion-text>
-      </div>
-
-    </div>
+          <p class="availability">
+            Die Verfügbarkeit bezieht sich immer auf die folgende Nacht des entsprechenden Tages!
+          </p>
+        </ion-footer>
+    </ion-page>
   </teleport>
 </template>
 
 <script lang="ts">
-import {IonButtons, IonDatetime, IonText} from "@ionic/vue";
+import {IonButtons, IonDatetime, IonFooter, IonText} from "@ionic/vue";
 
 export default {
   components: {
     IonDatetime,
     IonButtons,
-    IonText
+    IonText,
+    IonFooter
   },
   emits: ["finished"],
   computed: {
@@ -60,38 +70,69 @@ export default {
 </script>
 
 <style scoped lang="scss">
-div {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.8);
-}
+ion-content {
+  --ion-background-color: rgb(0.8, 0.8, 0.8, 0.7);
 
-.day {
-  display: inline-block;
-  border-radius: 1.5rem;
-  padding: 0.5rem 0.8rem;
+  .center {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 
-  &.green {
-    background-color: green;
-    margin-bottom: 0.2rem;
-  }
-
-  &.red {
-    background-color: red;
+    ion-button {
+      cursor: pointer;
+    }
   }
 }
 
-.description {
+ion-footer {
+  background-color: var(--ion-background-color-step-150);
+
+  padding: 0.5rem 0.5rem 0;
+
+  p {
+    padding-bottom: 0.2rem;
+  }
+
+  .day {
+    border-radius: 1.5rem;
+    padding: 0.5rem 0.8rem;
+    width: 10px;
+    height: 10px;
+
+    &.green {
+      background-color: green;
+      margin-bottom: 0.2rem;
+    }
+
+    &.red {
+      background-color: red;
+    }
+  }
+}
+
+/*ion-footer {
   background-color: var(--ion-background-color-step-100);
   padding: 0 0.5rem 0.5rem 0.5rem;
-  width: 21.875rem;
-}
-ion-button {
   width: 100%;
-}
+
+  .day {
+    display: inline-block;
+    border-radius: 1.5rem;
+    padding: 0.5rem 0.8rem;
+    width: 10px;
+    height: 10px;
+
+    &.green {
+      background-color: green;
+      margin-bottom: 0.2rem;
+    }
+
+    &.red {
+      background-color: red;
+    }
+  }
+}*/
 </style>

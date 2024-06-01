@@ -1,7 +1,5 @@
 <template>
   <ion-page>
-    <BoutiqueHeader title="Zimmer Suchen"/>
-
     <ion-content>
       <RoomOverview v-bind="rooms"/>
     </ion-content>
@@ -18,7 +16,7 @@ import bathImage from "@/assets/img/penthouse/Bath.jpg";
 import bedImage from "@/assets/img/penthouse/Bed.jpg";
 import minibarImage from "@/assets/img/penthouse/Minibar.jpg";
 import toiletImage from "@/assets/img/penthouse/Toilet.jpg";
-import RoomPageination from "@/components/RoomOverview/RoomPageination.vue";
+import RoomPageination from "@/components/RoomOverview/TheRoomPageination.vue";
 
 export default {
   components: {

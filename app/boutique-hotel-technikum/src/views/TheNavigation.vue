@@ -3,22 +3,22 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" href="/tabs/home">
+        <ion-tab-button tab="home" href="/home">
           <ion-icon aria-hidden="true" :icon="icons.home" />
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="search" href="/tabs/search">
+        <ion-tab-button tab="search" href="/search">
           <ion-icon aria-hidden="true" :icon="icons.search" />
           <ion-label>Search</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="about" href="/tabs/about">
+        <ion-tab-button tab="about" href="/about">
           <ion-icon aria-hidden="true" :icon="icons.informationCircle" />
           <ion-label>About</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="impressum" href="/tabs/impressum">
+        <ion-tab-button tab="impressum" href="/impressum">
           <ion-icon aria-hidden="true" :icon="icons.help" />
           <ion-label>Impressum</ion-label>
         </ion-tab-button>
