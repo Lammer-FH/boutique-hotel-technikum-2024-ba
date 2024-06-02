@@ -81,6 +81,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/RoomsPage'
 
+  /api/v1/rooms/{roomId}/booked:
+    get:
+      tags:
+        - Rooms
+      summary: Get room booked periods
+      description: Get room booked periods between two dates
+      operationId: getRoomBookedPeriods
+      parameters:
+        - name: roomId
+          in: path
+          schema:
+            type: integer
+          required: true
+        - name: period
+          in: query
+          schema:
+            $ref: '#/components/schemas/Period'
+          description: The period to search for for bookings.
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomBookedPeriods'
+
   /api/v1/bookings:
     post:
       tags:
@@ -332,3 +359,16 @@ components:
         - id
         - name
         - description
+
+    RoomBookedPeriods:
+      type: object
+      properties:
+        roomId:
+          type: integer
+          example: 1
+        requestedPeriod:
+          $ref: '#/components/schemas/Period'
+        booked:
+          type: array
+          items:
+            $ref: '#/components/schemas/Period'
