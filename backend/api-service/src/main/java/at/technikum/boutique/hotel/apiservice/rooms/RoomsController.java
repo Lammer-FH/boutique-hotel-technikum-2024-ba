@@ -1,6 +1,7 @@
 package at.technikum.boutique.hotel.apiservice.rooms;
 
 import at.technikum.boutique.hotel.apiservice.openapi.DTO.Period;
+import at.technikum.boutique.hotel.apiservice.openapi.DTO.RoomBookedPeriods;
 import at.technikum.boutique.hotel.apiservice.openapi.DTO.RoomsPage;
 import at.technikum.boutique.hotel.apiservice.openapi.api.RoomsApi;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,11 @@ public class RoomsController implements RoomsApi {
 
     @Override
     public ResponseEntity<RoomsPage> getAvailableRooms(Period availabilityPeriod, Integer startIndex, Integer limit) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return service.getAvailableRooms(availabilityPeriod, startIndex, limit);
+    }
+
+    @Override
+    public ResponseEntity<RoomBookedPeriods> getRoomBookedPeriods(Integer roomId, Period period) {
+        return service.getRoomBookedPeriods(roomId, period);
     }
 }
