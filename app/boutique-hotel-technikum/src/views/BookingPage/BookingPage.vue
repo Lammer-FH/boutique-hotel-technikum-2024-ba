@@ -6,16 +6,15 @@
           <ion-button
               color="danger"
               @click="cancel()"
-          >{{ validData ? "Abbrechen" : "Zurück zur Raumübersicht"}}</ion-button>
+          >Abbrechen</ion-button>
         </ion-row>
         <ion-row>
-          <h1 v-if="validData">Buchungsübersicht</h1>
-          <h1 v-else>Fehler: Keine Buchungsdaten vorhanden, Wähle zuerst im Such-Tab eine Zimmer zum Buchen aus!</h1>
+          <h1>Buchungsübersicht</h1>
         </ion-row>
       </ion-grid>
     </ion-header>
 
-    <ion-content v-if="validData">
+    <ion-content>
       <ion-grid>
         <ion-row>
           <ion-text>Anreise: <span>{{ booking.prettyArrival }}</span></ion-text>
@@ -31,7 +30,7 @@
         </ion-row>
       </ion-grid>
 
-      <TheBookingForm/>
+      <TheBookingForm @confirmed="toOverviewPage"/>
     </ion-content>
   </ion-page>
 </template>
@@ -59,6 +58,24 @@ export default {
   },
   methods: {
     cancel() {
+      this.router.navigate("/search/period");
+    },
+    toOverviewPage(inputs: {
+      firstName: string,
+      lastName: string,
+      eMail: string,
+      breakfast: "yes" | "no"
+    }) {
+      this.booking.firstName = inputs.firstName;
+      this.booking.lastName = inputs.lastName;
+      this.booking.eMail = inputs.eMail;
+      this.booking.breakfast = inputs.breakfast === "yes";
+
+      this.router.navigate("/booking-overview");
+    }
+  },
+  beforeCreate() {
+    if (!this.validData) {
       this.router.navigate("/search/period");
     }
   }

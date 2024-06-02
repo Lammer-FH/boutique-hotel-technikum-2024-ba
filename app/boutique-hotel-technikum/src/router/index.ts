@@ -40,7 +40,11 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'booking',
-        component: () => import('@/views/BookingPage/BookingOverviewPage/BookingPage.vue')
+        component: () => import('@/views/BookingPage/BookingPage.vue')
+      },
+      {
+        path: 'booking-overview',
+        component: () => import('@/views/BookingPage/BookingOverviewPage/BookingOverviewPage.vue')
       },
       {
         path: 'about',

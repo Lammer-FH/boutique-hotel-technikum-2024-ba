@@ -67,14 +67,14 @@ export default {
     IonRadioGroup,
     IonRadio
   },
+  emits: ["confirmed"],
   data() {
     return {
       valid: {
         firstName: true,
         lastName: true,
         eMail: true,
-        eMailRepeat: true,
-        breakfast: true
+        eMailRepeat: true
       },
       inputs: {
         firstName: "",
@@ -91,9 +91,14 @@ export default {
       this.valid.lastName = this.inputs.lastName.length > 0;
       this.valid.eMail = !!this.validateEmail(this.inputs.eMail);
       this.valid.eMailRepeat = this.inputs.eMail === this.inputs.eMailRepeat;
-      this.valid.breakfast = this.inputs.breakfast !== "";
-      console.log(this.inputs);
-      console.log(this.valid);
+
+      for (const valid of Object.values(this.valid)) {
+        if (!valid) {
+          return
+        }
+      }
+
+      this.$emit("confirmed", this.inputs);
     },
     validateEmail(email: string) {
       return email.match(
