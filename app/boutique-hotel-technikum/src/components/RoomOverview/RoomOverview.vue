@@ -20,11 +20,10 @@
                      :name="name" />
         </p>
         <p class="money">{{ formatMoney(price) }}</p>
-        <ion-button @click="showCalendarFor = id">Verfügbarkeit prüfen</ion-button>
+        <slot></slot>
       </section>
     </div>
   </div>
-  <BoutiqueCalendar v-if="showCalendarFor" @finished="showCalendarFor = undefined"/>
 </template>
 
 <script lang="ts">
@@ -65,11 +64,6 @@ export default {
       type: Number,
       required: true
     }
-  },
-  data() {
-    return {
-      showCalendarFor: undefined as number | undefined
-    }
   }
 }
 </script>
@@ -98,10 +92,6 @@ export default {
 
   .money {
     text-align: center;
-  }
-
-  ion-button {
-    width: 100%;
   }
 }
 </style>

@@ -1,7 +1,10 @@
 <template>
   <ion-page>
     <ion-content>
-      <RoomOverview v-bind="rooms"/>
+      <RoomOverview v-bind="rooms">
+        <ion-button @click="showCalendarFor = rooms.id">Verfügbarkeit prüfen</ion-button>
+      </RoomOverview>
+      <BoutiqueCalendar v-if="showCalendarFor" @finished="showCalendarFor = undefined"/>
     </ion-content>
 
     <ion-footer>
@@ -17,9 +20,11 @@ import bedImage from "@/assets/img/penthouse/Bed.jpg";
 import minibarImage from "@/assets/img/penthouse/Minibar.jpg";
 import toiletImage from "@/assets/img/penthouse/Toilet.jpg";
 import RoomPageination from "@/components/RoomOverview/TheRoomPageination.vue";
+import BoutiqueCalendar from "@/components/UI/BoutiqueCalendar.vue";
 
 export default {
   components: {
+    BoutiqueCalendar,
     RoomPageination,
     RoomOverview
   },
@@ -67,8 +72,15 @@ export default {
           }
         ],
         price: 1_999
-      }
+      },
+      showCalendarFor: undefined as number | undefined
     }
   }
 }
 </script>
+
+<style scoped>
+ion-button {
+  width: 100%;
+}
+</style>

@@ -35,7 +35,7 @@ ion-tab-bar {
 ion-tab-button {
   font-size: 1.2rem;
   font-weight: bolder;
-  padding: 0px;
+  padding: 0;
   color: white;
   border: solid 2px rgb(33, 95, 154);
 
