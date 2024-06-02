@@ -11,7 +11,7 @@ import {
   IonicVue,
   IonImg,
   IonPage,
-  IonRow,
+  IonRow, IonText,
   IonTitle,
   IonToolbar
 } from '@ionic/vue';
@@ -46,9 +46,11 @@ import '@ionic/vue/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
+import {createPinia} from "pinia";
 
 const app = createApp(App)
   .use(IonicVue)
+  .use(createPinia())
   .use(router);
 
 app.component("IonPage", IonPage)
@@ -62,7 +64,8 @@ app.component("IonPage", IonPage)
     .component("IonGrid", IonGrid)
     .component("IonRow", IonRow)
     .component("IonCol", IonCol)
-    .component("IonButton", IonButton);
+    .component("IonButton", IonButton)
+    .component("IonText", IonText);
 
 app.component("BoutiqueHeader", BoutiqueHeader);
 
