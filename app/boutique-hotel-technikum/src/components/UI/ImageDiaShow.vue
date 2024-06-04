@@ -1,7 +1,7 @@
 <template>
   <ion-row>
     <div class="container">
-      <div :class="{ slides: true, fade: true }" ref="slide">
+      <div class="slides fade" ref="slide">
         <div class="page">{{ `${slideIndex + 1} / ${images.length}` }}</div>
         <ion-img class="image" :src="images[slideIndex].src" />
         <div class="description">{{ images[slideIndex].alt }}</div>
@@ -73,7 +73,7 @@ ion-row {
 
 .container {
   position: relative;
-  max-width: 100%;
+  width: 100%;
   margin: auto;
 
   .page {
@@ -89,6 +89,7 @@ ion-row {
     display: flex;
     justify-content: center;
     text-align: center;
+    width: 100%;
   }
 
   .description {
