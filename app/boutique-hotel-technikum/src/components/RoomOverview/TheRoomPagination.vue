@@ -9,7 +9,7 @@
             shape="round"
             size="small"
             :class="buttonClass(page)"
-            @click="currentPageIndex = page - 1"
+            @click="pageObject.setCurrentPage(page)"
       >
         {{ page }}
       </ion-button>
@@ -22,16 +22,23 @@
 </template>
 
 <script lang="ts">
+import {PropType} from "vue";
+
+interface PageObject {
+  pages: number,
+  get currentPage(): number,
+  setCurrentPage(page: number): void
+}
+
 export default {
   props: {
-    pages: {
-      type: Number,
+    pageObject: {
+      type: Object as PropType<PageObject>,
       required: true
     }
   },
   data() {
     return {
-      currentPageIndex: 0,
       buttonData: {
         possibleButtons: 0
       }
@@ -40,11 +47,11 @@ export default {
   emits: ["pageChanged"],
   computed: {
     shownPages() {
-      const pages: number[] = Array.from({length: 10}, (_, i) => i + 1);
+      const pages: number[] = Array.from({length: this.pageObject.pages}, (_, i) => i + 1);
 
       const listLength = pages.length;
-      let startIndex = Math.max(0, this.currentPageIndex - 3);
-      let endIndex = Math.min(listLength, this.currentPageIndex + 4);
+      let startIndex = Math.max(0, this.pageObject.currentPage - 3);
+      let endIndex = Math.min(listLength, this.pageObject.currentPage + 4);
 
       if (endIndex - startIndex < 7) {
         if (startIndex === 0) {
@@ -56,7 +63,7 @@ export default {
       if (startIndex !== 0) {
         startIndex += 1;
       }
-      if (endIndex !== this.pages) {
+      if (endIndex !== this.pageObject.pages) {
         endIndex -= 1;
       }
 
@@ -66,19 +73,19 @@ export default {
       return this.shownPages[0] !== 1;
     },
     cropAfter() {
-      return this.shownPages[this.shownPages.length - 1] !== this.pages;
+      return this.shownPages[this.shownPages.length - 1] !== this.pageObject.pages;
     }
   },
   methods: {
     addPage(value: number) {
-      let newPage = (this.currentPageIndex + value) % this.pages
+      let newPage = (this.pageObject.currentPage - 1 + value) % this.pageObject.pages
       if (newPage < 0) {
-        newPage = newPage + this.pages;
+        newPage = newPage + this.pageObject.pages;
       }
-      this.currentPageIndex = newPage;
+      this.pageObject.setCurrentPage(newPage + 1);
     },
     buttonClass(index: number) {
-      return { active: index === (this.currentPageIndex + 1) }
+      return { active: index === (this.pageObject.currentPage) }
     }
   }
 }
@@ -105,6 +112,8 @@ ion-button {
   margin: 0.1rem;
   font-weight: bolder;
   color: white;
+  --padding-start: 0;
+  --padding-end: 0;
 
   &.active {
     --background: var(--ion-color-tertiary);

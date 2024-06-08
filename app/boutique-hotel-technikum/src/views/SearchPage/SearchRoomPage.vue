@@ -1,80 +1,46 @@
 <template>
   <ion-page>
-    <ion-content>
-      <RoomOverview v-bind="rooms">
-        <ion-button @click="showCalendarFor = rooms.id">Verfügbarkeit prüfen</ion-button>
+    <ion-content v-if="availableRooms.loaded">
+      <RoomOverview v-for="room in availableRooms.rooms" :room="room">
+        <ion-button @click="showCalendarFor = room.id">Verfügbarkeit prüfen</ion-button>
       </RoomOverview>
       <BoutiqueCalendar v-if="showCalendarFor" @finished="showCalendarFor = undefined"/>
     </ion-content>
 
+    <ion-content v-else>
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          {{ availableRooms.fetchError ? "Es ist ein Fehler aufgetreten, bitte versuche es später erneut!" : "Zimmer werden geladen..." }}
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+
     <ion-footer>
-      <RoomPageination :pages="10"/>
+      <RoomPagination :page-object="availableRooms"/>
     </ion-footer>
   </ion-page>
 </template>
 
 <script lang="ts">
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
-import bathImage from "@/assets/img/penthouse/Bath.jpg";
-import bedImage from "@/assets/img/penthouse/Bed.jpg";
-import minibarImage from "@/assets/img/penthouse/Minibar.jpg";
-import toiletImage from "@/assets/img/penthouse/Toilet.jpg";
-import RoomPageination from "@/components/RoomOverview/TheRoomPageination.vue";
+import RoomPagination from "@/components/RoomOverview/TheRoomPagination.vue";
 import BoutiqueCalendar from "@/components/UI/BoutiqueCalendar.vue";
+import {useAvailableRoomsStore} from "@/store/availableRooms";
 
 export default {
   components: {
     BoutiqueCalendar,
-    RoomPageination,
+    RoomPagination,
     RoomOverview
   },
   data() {
     return {
-      rooms: {
-        id: 1,
-        name: "Penthouse Suite",
-        images: [
-          {
-            src: bedImage,
-            alt: "Doppelbett mit hervorragender Aussicht auf die Innenstadt!"
-          },
-          {
-            src: bathImage,
-            alt: "Wunderschönes Badezimmer mit Badewanne, Dusche und Whirlpool!"
-          },
-          {
-            src: minibarImage,
-            alt: "Minibar mit riesiger Auswahl an Getränken!"
-          },
-          {
-            src: toiletImage,
-            alt: "Designer-Toilette mit Waschbecken und Spiegel!"
-          }
-        ],
-        description: "Luxuriöse Suite im obersten Stock des Boutique-Hotel-Technikum.",
-        beds: 2,
-        extras: [
-          {
-            icon: "water",
-            name: "Badezimmer"
-          },
-          {
-            icon: "wine",
-            name: "Minibar"
-          },
-          {
-            icon: "tv",
-            name: "Fernseher"
-          },
-          {
-            icon: "thermometer",
-            name: "Klimaanlage"
-          }
-        ],
-        price: 1_999
-      },
+      availableRooms: useAvailableRoomsStore(),
       showCalendarFor: undefined as number | undefined
     }
+  },
+  created() {
+    this.availableRooms.fetchRooms();
   }
 }
 </script>

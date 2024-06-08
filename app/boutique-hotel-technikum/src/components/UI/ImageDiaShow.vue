@@ -4,7 +4,7 @@
       <div :class="{ slides: true, fade: true }" ref="slide">
         <div class="page">{{ `${slideIndex + 1} / ${images.length}` }}</div>
         <ion-img class="image" :src="images[slideIndex].src" />
-        <div class="description">{{ images[slideIndex].alt }}</div>
+        <div :class="descriptionClass">{{ images[slideIndex].alt }}</div>
       </div>
 
       <a class="prev" @click="plusSlides(-1)">&#10094;</a>
@@ -36,6 +36,14 @@ export default {
   data() {
     return {
       slideIndex: 0
+    }
+  },
+  computed: {
+    descriptionClass() {
+      return {
+        description: true,
+        hidden: this.images[this.slideIndex].alt.length <= 0
+      }
     }
   },
   methods: {
@@ -100,6 +108,10 @@ ion-row {
     bottom: 8px;
     width: 100%;
     text-align: center;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   .prev, .next {

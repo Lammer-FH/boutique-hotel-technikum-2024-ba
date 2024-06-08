@@ -7,29 +7,18 @@
 
 <script lang="ts">
 import {addIcons} from "ionicons";
-import {water, wine, tv, thermometer} from "ionicons/icons";
+import {thermometer, tv, water, wine} from "ionicons/icons";
 
 export type Extra = {
   icon: string,
   name: string
 }
 
-const extraIcons = {
-  "water": water,
-  "wine": wine,
-  "tv": tv,
-  "thermometer": thermometer
-}
-addIcons(extraIcons);
-
 export default {
   props: {
     icon: {
       type: String,
-      required: true,
-      validator(value: string) {
-        return Object.keys(extraIcons).includes(value);
-      }
+      required: true
     },
     name: {
       type: String,
