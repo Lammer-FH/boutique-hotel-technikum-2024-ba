@@ -4,14 +4,15 @@ import router from './router';
 
 import {
   IonButton,
+  IonButton,
   IonCol,
-  IonContent, IonFooter,
+  IonContent, IonFooter, IonFooter,
   IonGrid,
   IonHeader, IonIcon,
   IonicVue,
   IonImg,
   IonPage,
-  IonRow,
+  IonRow, IonText,
   IonTitle,
   IonToolbar
 } from '@ionic/vue';
@@ -51,6 +52,7 @@ import IonRowCol from "@/components/UI/IonRowCol.vue";
 
 const app = createApp(App)
   .use(IonicVue)
+  .use(createPinia())
   .use(createPinia())
   .use(router);
 
