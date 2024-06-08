@@ -2,12 +2,10 @@
   <ion-grid>
     <ion-row>
       <div class="container">
-
         <h1>{{ room.title }}</h1>
 
-
         <section class="dia">
-          <ImageDiaShow :images="[{ src: `http://localhost:8080/images/${room.id}.jpg`, alt: '' }]"></ImageDiaShow>
+          <ImageDiaShow :images="imageObject"></ImageDiaShow>
         </section>
 
         <section>
@@ -44,6 +42,14 @@ export default {
     room: {
       type: Object as PropType<Room>,
       required: true
+    }
+  },
+  computed: {
+    imageObject() {
+      return [{
+        src: `${import.meta.env.VITE_BACKEND_URL}/images/${this.room.id}.jpg`,
+        alt: ''
+      }];
     }
   }
 }

@@ -12,7 +12,7 @@
                 :prefer-wheel="true"
                 presentation="date"
                 :year-values="years"
-                v-model="arrivalDate"
+                v-model="availableRooms.arrival"
             >
               <span slot="title">Anreisetag</span>
             </ion-datetime>
@@ -24,16 +24,10 @@
                 :prefer-wheel="true"
                 presentation="date"
                 :year-values="years"
-                v-model="departureDate"
+                v-model="availableRooms.departure"
             >
               <span slot="title">Abreisetag</span>
             </ion-datetime>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col class="label">
-            <ion-button @click="searchRooms">Suchen</ion-button>
           </ion-col>
         </ion-row>
 
@@ -44,8 +38,15 @@
         </ion-row>
 
         <ion-row>
+          <ion-col class="label">
+            <ion-button @click="searchRooms">Suchen</ion-button>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
           <ion-col>
-            <RoomOverview v-bind="rooms">
+            <RoomOverview v-for="room in availableRooms.rooms" :room="room">
               <ion-button>Buchen</ion-button>
             </RoomOverview>
           </ion-col>
@@ -58,10 +59,7 @@
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 import {IonDatetime} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
-import bedImage from "@/assets/img/penthouse/Bed.jpg";
-import bathImage from "@/assets/img/penthouse/Bath.jpg";
-import minibarImage from "@/assets/img/penthouse/Minibar.jpg";
-import toiletImage from "@/assets/img/penthouse/Toilet.jpg";
+import {useAvailableRoomsByPeriodStore} from "@/store/availableRoomByPeriod";
 
 export default {
   components: {
@@ -71,51 +69,7 @@ export default {
   },
   data() {
     return {
-      arrivalDate: new Date().toISOString(),
-      departureDate: new Date().toISOString(),
-      rooms: {
-        id: 1,
-        name: "Penthouse Suite",
-        images: [
-          {
-            src: bedImage,
-            alt: "Doppelbett mit hervorragender Aussicht auf die Innenstadt!"
-          },
-          {
-            src: bathImage,
-            alt: "Wunderschönes Badezimmer mit Badewanne, Dusche und Whirlpool!"
-          },
-          {
-            src: minibarImage,
-            alt: "Minibar mit riesiger Auswahl an Getränken!"
-          },
-          {
-            src: toiletImage,
-            alt: "Designer-Toilette mit Waschbecken und Spiegel!"
-          }
-        ],
-        description: "Luxuriöse Suite im obersten Stock des Boutique-Hotel-Technikum.",
-        beds: 2,
-        extras: [
-          {
-            icon: "water",
-            name: "Badezimmer"
-          },
-          {
-            icon: "wine",
-            name: "Minibar"
-          },
-          {
-            icon: "tv",
-            name: "Fernseher"
-          },
-          {
-            icon: "thermometer",
-            name: "Klimaanlage"
-          }
-        ],
-        price: 1_999
-      }
+      availableRooms: useAvailableRoomsByPeriodStore()
     }
   },
   computed: {
@@ -124,7 +78,7 @@ export default {
       return [thisYear, thisYear+1, thisYear+2]
     },
     periodInvalid() {
-      return new Date(this.arrivalDate) >= new Date(this.departureDate);
+      return new Date(this.availableRooms.arrival) >= new Date(this.availableRooms.departure);
     }
   },
   methods: {
@@ -132,6 +86,8 @@ export default {
       if (this.periodInvalid) {
         return;
       }
+
+      this.availableRooms.setCurrentPage(1);
     }
   }
 }

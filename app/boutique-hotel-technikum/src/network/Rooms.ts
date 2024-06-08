@@ -6,5 +6,5 @@ export async function getRooms(page: number, pageSize: number = 5): Promise<Room
     Guard.against.less(page, 1);
     Guard.against.less(pageSize, 1)
 
-    return (await axios.get<RoomResponse>(`http://localhost:8080/api/v1/rooms?page=${page}&pageSize=${pageSize}`)).data;
+    return (await axios.get<RoomResponse>(`${import.meta.env.VITE_BACKEND_URL}/api/v1/rooms?page=${page}&pageSize=${pageSize}`)).data;
 }
