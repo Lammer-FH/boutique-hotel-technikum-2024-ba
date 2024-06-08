@@ -47,6 +47,7 @@ import '@ionic/vue/css/palettes/dark.system.css';
 import './theme/variables.css';
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 import {createPinia} from "pinia";
+import IonRowCol from "@/components/UI/IonRowCol.vue";
 
 const app = createApp(App)
   .use(IonicVue)
@@ -64,7 +65,8 @@ app.component("IonPage", IonPage)
     .component("IonGrid", IonGrid)
     .component("IonRow", IonRow)
     .component("IonCol", IonCol)
-    .component("IonButton", IonButton);
+    .component("IonButton", IonButton)
+    .component("IonRowCol", IonRowCol);
 
 app.component("BoutiqueHeader", BoutiqueHeader);
 

@@ -13,7 +13,7 @@
           <p>Betten: {{ room.bedAmount }}</p>
           <p>
             Extras:
-            <RoomExtra v-for="{name, description} in room.extras"
+            <RoomExtra v-for="{name, description} in sortedExtras"
                        :key="name"
                        :icon="getIconByName(name)"
                        :name="description" />
@@ -50,6 +50,9 @@ export default {
         src: `${import.meta.env.VITE_BACKEND_URL}/images/${this.room.id}.jpg`,
         alt: ''
       }];
+    },
+    sortedExtras() {
+      return this.room.extras.sort((first, second) => first.description < second.description ? -1 : 1);
     }
   }
 }

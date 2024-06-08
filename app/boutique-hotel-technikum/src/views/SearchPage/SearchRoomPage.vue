@@ -16,21 +16,21 @@
     </ion-content>
 
     <ion-footer>
-      <RoomPagination :page-object="availableRooms"/>
+      <TheRoomPagination :page-object="availableRooms"/>
     </ion-footer>
   </ion-page>
 </template>
 
 <script lang="ts">
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
-import RoomPagination from "@/components/RoomOverview/TheRoomPagination.vue";
+import TheRoomPagination from "@/components/RoomOverview/TheRoomPagination.vue";
 import BoutiqueCalendar from "@/components/UI/BoutiqueCalendar.vue";
 import {useAvailableRoomsStore} from "@/store/availableRooms";
 
 export default {
   components: {
     BoutiqueCalendar,
-    RoomPagination,
+    TheRoomPagination,
     RoomOverview
   },
   data() {
