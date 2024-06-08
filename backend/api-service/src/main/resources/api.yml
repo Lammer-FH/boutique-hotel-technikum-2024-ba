@@ -1,16 +1,16 @@
 openapi: 3.0.3
 info:
   title: Boutique Hotel Technikum
-  version: 0.0.2
+  version: 0.0.3
 servers:
-  - url: http://localhost/api/v1
+  - url: http://localhost:8080
 tags:
   - name: Rooms
     description: Everything about Rooms
   - name: Bookings
 
 paths:
-  /rooms:
+  /api/v1/rooms:
     get:
       tags:
         - Rooms
@@ -18,7 +18,7 @@ paths:
       description: Get all rooms
       operationId: getRooms
       parameters:
-        - name: startIndex
+        - name: page
           in: query
           required: true
           schema:
@@ -26,7 +26,7 @@ paths:
             minimum: 1
             default: 1
             example: 1
-        - name: limit
+        - name: pageSize
           in: query
           description: The number of items to return
           schema:
@@ -41,9 +41,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoomsList'
-
-  /rooms/availability:
+                $ref: '#/components/schemas/RoomsPage'
+  /api/v1/rooms/available:
     get:
       tags:
         - Rooms
@@ -57,7 +56,7 @@ paths:
             $ref: '#/components/schemas/Period'
           description: The period to search for available rooms if not set all rooms will be listed independent from their availability.
           required: true
-        - name: startIndex
+        - name: page
           in: query
           required: true
           schema:
@@ -65,9 +64,9 @@ paths:
             minimum: 1
             default: 1
             example: 1
-        - name: limit
+        - name: pageSize
           in: query
-          description: The number of items to return
+          description: The number of items to return per page
           schema:
             type: integer
             minimum: 1
@@ -80,9 +79,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoomsList'
+                $ref: '#/components/schemas/RoomsPage'
 
-  /bookings:
+  /api/v1/bookings:
     post:
       tags:
         - Bookings
@@ -125,7 +124,7 @@ components:
           type: integer
           example: 200
           description: Price per night per person.
-        
+
       required:
         - title
         - description
@@ -137,13 +136,13 @@ components:
       properties:
         id:
           type: string
-          format: UUID
-          example: "28cdaf9d-d1b7-4832-b29c-4cfe021cd329"
+          format: integer
+          example: 1
         hotel:
           $ref: '#/components/schemas/HotelResponse'
         extras:
           type: array
-          items: 
+          items:
             $ref: '#/components/schemas/ExtraResponse'
       required:
         - id
@@ -152,28 +151,36 @@ components:
       allOf:
         - $ref: '#/components/schemas/Room'
         - type: object
-    
-    RoomsList:
+
+    RoomsPage:
       type: object
       properties:
         period:
           $ref: '#/components/schemas/Period'
-        availableRooms:
+        rooms:
           type: array
           items:
             $ref: '#/components/schemas/RoomResponse'
-        startIndex:
+        pageNumber:
           type: integer
           example: 1
-        numberOfElements:
+        pageSize:
           type: integer
           example: 5
+        totalPages:
+          type: integer
+          example: 5
+        totalElements:
+          type: number
+          example: 25
       required:
-        - period
-        - availableRooms
+        - rooms
         - startIndex
-        - numberOfElements
-      
+        - pageNumber
+        - pageSize
+        - totalPages
+        - totalElements
+
     Customer:
       type: object
       properties:
@@ -194,9 +201,9 @@ components:
       required:
         - firstName
         - secondName
-        - email 
-        - birthDate   
-    
+        - email
+        - birthDate
+
     CustomerResponse:
       properties:
         id:
@@ -208,7 +215,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/Customer'
         - type: object
-    
+
     Hotel:
       type: object
       properties:
@@ -237,8 +244,8 @@ components:
       properties:
         id:
           type: string
-          format: UUID
-          example: "28cdaf9d-d1b7-4832-b29c-4cfe021cd329"
+          format: integer
+          example: 1
       required:
         - id
       allOf:
@@ -321,11 +328,7 @@ components:
         description:
           type: string
           example: "Free WIFI available"
-        iconName:
-          type: string
-          example: "wifi"
       required:
         - id
         - name
         - description
-        - iconName

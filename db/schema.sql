@@ -1,4 +1,4 @@
-CREATE DATABASE boutique_hotel;
+CREATE DATABASE boutique_hotel CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE boutique_hotel;
 
@@ -6,8 +6,7 @@ CREATE TABLE
   extra (
     id SMALLINT unsigned auto_increment PRIMARY key,
     name tinytext NOT NULL,
-    description tinytext NOT NULL,
-    icon_name tinytext NOT NULL
+    description tinytext NOT NULL
   );
 
 CREATE TABLE
@@ -25,11 +24,11 @@ CREATE TABLE
   room (
     id INT unsigned auto_increment PRIMARY key,
     hotel_id INT unsigned NOT NULL,
-    room_number SMALLINT unsigned NOT NULL,
+    room_number INT unsigned NOT NULL,
     title tinytext NOT NULL,
     description text NOT NULL,
-    bed_amount tinyint unsigned NOT NULL,
-    price tinyint unsigned NOT NULL,
+    bed_amount INT unsigned NOT NULL,
+    price INT unsigned NOT NULL,
     CONSTRAINT room_hotel_id_fk FOREIGN key (hotel_id) REFERENCES hotel (id)
   );
 
