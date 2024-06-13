@@ -70,7 +70,8 @@ public class BookingsServiceImpl implements BookingsService {
                 customerEntity = customerRepository.save(customerEntity);
             }
         } else {
-            customerEntity = customerMapper.mapToEntity(customer);
+            val tempCustomerEntity = customerMapper.mapToEntity(customer);
+            customerEntity = customerRepository.save(tempCustomerEntity);
         }
         return customerEntity;
     }
