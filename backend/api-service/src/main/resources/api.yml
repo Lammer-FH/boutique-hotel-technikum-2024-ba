@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Boutique Hotel Technikum
-  version: 0.0.3
+  version: 0.0.4
 servers:
   - url: http://localhost:8080
 tags:
@@ -234,9 +234,8 @@ components:
     CustomerResponse:
       properties:
         id:
-          type: string
-          format: UUID
-          example: "28cdaf9d-d1b7-4832-b29c-4cfe021cd329"
+          type: integer
+          example: 1
       required:
         - id
       allOf:
@@ -288,9 +287,8 @@ components:
           type: boolean
           example: true
         roomId:
-          type: string
-          format: UUID
-          example: "28cdaf9d-d1b7-4832-b29c-4cfe021cd329"
+          type: integer
+          example: 1
         reservationPeriod:
           $ref: '#/components/schemas/Period'
       required:
