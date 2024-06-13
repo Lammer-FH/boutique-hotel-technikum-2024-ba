@@ -17,6 +17,7 @@ import java.util.Date;
 public class CustomerEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "first_name", nullable = false, columnDefinition = "TINYTEXT")
