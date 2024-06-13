@@ -5,15 +5,13 @@ import at.technikum.boutique.hotel.apiservice.openapi.DTO.Booking;
 import at.technikum.boutique.hotel.apiservice.openapi.DTO.BookingResponse;
 import at.technikum.boutique.hotel.apiservice.openapi.DTO.Period;
 import at.technikum.boutique.hotel.apiservice.rooms.domain.RoomEntity;
-import lombok.val;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,13 +41,11 @@ public interface BookingMapper {
 
     @Named("DateToLocalDate")
     default LocalDate convert(Date date) {
-        val zoneId = ZoneId.systemDefault();
-        val instant = date.toInstant();
-        return LocalDate.ofInstant(instant, zoneId);
+        return date.toLocalDate();
     }
 
     @Named("LocalDateToDate")
     default Date convert(LocalDate date) {
-        return Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return Date.valueOf(date);
     }
 }

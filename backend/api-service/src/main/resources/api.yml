@@ -225,6 +225,7 @@ components:
           type: string
           format: date
           example: "2000-01-21"
+          x-field-extra-annotation: '@com.fasterxml.jackson.annotation.JsonFormat(shape = com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")'
       required:
         - firstName
         - secondName
@@ -334,10 +335,12 @@ components:
           type: string
           format: date
           example: "2017-07-21"
+          x-field-extra-annotation: '@com.fasterxml.jackson.annotation.JsonFormat(shape = com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")'
         end:
           type: string
           format: date
           example: "2017-07-21"
+          x-field-extra-annotation: '@com.fasterxml.jackson.annotation.JsonFormat(shape = com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")'
       required:
         - start
         - end
