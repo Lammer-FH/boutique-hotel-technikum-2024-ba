@@ -1,13 +1,10 @@
 package at.technikum.boutique.hotel.apiservice.hotels.domain;
 
-import at.technikum.boutique.hotel.apiservice.rooms.domain.RoomEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -38,7 +35,4 @@ public class HotelEntity {
 
     @Column(name = "contact_phone_number", nullable = false, length = 20)
     private String contactPhoneNumber;
-
-    @OneToMany(mappedBy = "hotel")
-    private Set<RoomEntity> rooms;
 }
