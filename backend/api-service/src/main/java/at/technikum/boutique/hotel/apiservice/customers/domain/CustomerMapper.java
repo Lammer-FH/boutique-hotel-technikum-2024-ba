@@ -14,4 +14,7 @@ public interface CustomerMapper {
 
     @Mapping(source = "customerId", target = "id")
     CustomerEntity mapToEntity(Integer customerId, Customer dto);
+
+    @Mapping(target = "id", ignore = true)
+    CustomerEntity mapToEntity(Customer dto);
 }

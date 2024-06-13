@@ -59,7 +59,7 @@ public class BookingsServiceImpl implements BookingsService {
     }
 
     private CustomerEntity CreateOrUpdateCustomer(Customer customer) {
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
         // Check if user exist
         val customerOpt = customerRepository.findByEmail(customer.getEmail());
         if (customerOpt.isPresent()) {
@@ -69,6 +69,8 @@ public class BookingsServiceImpl implements BookingsService {
             if (existingCustomer != customerEntity) {
                 customerEntity = customerRepository.save(customerEntity);
             }
+        } else {
+            customerEntity = customerMapper.mapToEntity(customer);
         }
         return customerEntity;
     }
