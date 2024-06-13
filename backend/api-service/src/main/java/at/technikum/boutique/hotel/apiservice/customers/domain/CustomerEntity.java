@@ -25,7 +25,7 @@ public class CustomerEntity {
     @Column(name = "second_name", nullable = false, columnDefinition = "TINYTEXT")
     private String secondName;
 
-    @Column(name = "email", nullable = false, columnDefinition = "TINYTEXT")
+    @Column(name = "email", nullable = false, unique = true, columnDefinition = "TINYTEXT")
     private String email;
 
     @Column(name = "birth_date", nullable = false)
