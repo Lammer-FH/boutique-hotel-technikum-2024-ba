@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class BookingsController implements BookingsApi {
 
+    private final BookingsService service;
+
     @Override
     public ResponseEntity<BookingResponse> createBooking(Booking booking) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return service.createBooking(booking);
     }
 }

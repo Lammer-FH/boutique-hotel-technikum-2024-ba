@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {Room} from "@/network/Room";
-import {getRooms} from "@/network/Rooms";
+import {getRooms} from "@/network/getRooms";
 import CancellationTokenCreator from "@/utils/CancellationTokenCreator";
 
 const cancellationTokenCreator = new CancellationTokenCreator();

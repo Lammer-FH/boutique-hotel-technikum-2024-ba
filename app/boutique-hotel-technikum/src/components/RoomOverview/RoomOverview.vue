@@ -68,7 +68,7 @@ ion-row {
     padding: 10px;
     border-radius: 10px;
     width: 100%;
-    max-width: 1000px;
+    max-width: 512px;
 
 
     .dia {

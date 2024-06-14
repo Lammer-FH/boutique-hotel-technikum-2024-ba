@@ -1,6 +1,5 @@
 <template>
   <ion-page>
-
     <BoutiqueHeader title="Freie Zimmer suchen"/>
     <ion-content>
       <ion-grid>
@@ -12,8 +11,7 @@
                 :prefer-wheel="true"
                 presentation="date"
                 :year-values="years"
-                v-model="availableRooms.arrival"
-            >
+                v-model="searchArrival">
               <span slot="title">Anreisetag</span>
             </ion-datetime>
           </ion-col>
@@ -24,8 +22,7 @@
                 :prefer-wheel="true"
                 presentation="date"
                 :year-values="years"
-                v-model="availableRooms.departure"
-            >
+                v-model="searchDeparture">
               <span slot="title">Abreisetag</span>
             </ion-datetime>
           </ion-col>
@@ -37,20 +34,18 @@
           </ion-col>
         </ion-row>
 
-        <ion-row>
-          <ion-col>
+        <IonRowCol>
             <ion-button @click="searchRooms">Suchen</ion-button>
-          </ion-col>
-        </ion-row>
+        </IonRowCol>
 
         <IonRowCol v-if="availableRooms.state === ERoomSearchState.Loaded" v-for="room in availableRooms.rooms">
           <RoomOverview :room="room">
-            <ion-button>Buchen</ion-button>
+            <ion-button router-link="/booking" router-direction="forward" @click="goToBooking(room)">Buchen</ion-button>
           </RoomOverview>
         </IonRowCol>
 
         <IonRowCol v-if="noAvailableRooms">
-            Leider sind keien Freien Zimmer während dieses Zeitraumes mehr verfügbar...
+          Leider sind während dieses Zeitraums keine freien Zimmer mehr verfügbar...
         </IonRowCol>
 
         <IonRowCol v-if="availableRooms.state === ERoomSearchState.Loading">
@@ -71,10 +66,12 @@
 
 <script lang="ts">
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
-import {IonDatetime} from "@ionic/vue";
+import {IonDatetime, useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
-import {ERoomSearchState, useAvailableRoomsByPeriodStore} from "@/store/availableRoomByPeriod";
+import {ERoomSearchState, useAvailableRoomsByPeriodStore} from "@/stores/availableRoomByPeriod";
 import TheRoomPagination from "@/components/RoomOverview/TheRoomPagination.vue";
+import {Room} from "@/network/Room";
+import {useBookingStore} from "@/stores/booking";
 
 export default {
   components: {
@@ -85,7 +82,11 @@ export default {
   },
   data() {
     return {
-      availableRooms: useAvailableRoomsByPeriodStore()
+      availableRooms: useAvailableRoomsByPeriodStore(),
+      booking: useBookingStore(),
+      searchArrival: useAvailableRoomsByPeriodStore().arrival,
+      searchDeparture: useAvailableRoomsByPeriodStore().departure,
+      router: useIonRouter()
     }
   },
   computed: {
@@ -97,7 +98,7 @@ export default {
       return [thisYear, thisYear+1, thisYear+2]
     },
     periodInvalid() {
-      return new Date(this.availableRooms.arrival) >= new Date(this.availableRooms.departure);
+      return new Date(this.searchArrival) >= new Date(this.searchDeparture);
     },
     noAvailableRooms() {
       return this.availableRooms.state === ERoomSearchState.Loaded && this.availableRooms.rooms.length <= 0;
@@ -105,11 +106,16 @@ export default {
   },
   methods: {
     searchRooms() {
-      if (this.periodInvalid) {
-        return;
-      }
+      if (this.periodInvalid) { return; }
 
+      this.availableRooms.arrival = this.searchArrival;
+      this.availableRooms.departure = this.searchDeparture;
       this.availableRooms.setCurrentPage(1);
+    },
+    goToBooking(room: Room) {
+      this.booking.arrival = new Date(this.availableRooms.arrival);
+      this.booking.departure = new Date(this.availableRooms.departure);
+      this.booking.room = room;
     }
   }
 }

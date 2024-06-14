@@ -5,13 +5,16 @@ import router from './router';
 import {
   IonButton,
   IonCol,
-  IonContent, IonFooter,
+  IonContent,
+  IonFooter,
   IonGrid,
-  IonHeader, IonIcon,
+  IonHeader,
+  IonIcon,
   IonicVue,
   IonImg,
   IonPage,
   IonRow,
+  IonText,
   IonTitle,
   IonToolbar
 } from '@ionic/vue';
@@ -65,10 +68,10 @@ app.component("IonPage", IonPage)
     .component("IonGrid", IonGrid)
     .component("IonRow", IonRow)
     .component("IonCol", IonCol)
+    .component("IonText", IonText)
     .component("IonButton", IonButton)
-    .component("IonRowCol", IonRowCol);
-
-app.component("BoutiqueHeader", BoutiqueHeader);
+    .component("IonRowCol", IonRowCol)
+    .component("BoutiqueHeader", BoutiqueHeader);
 
 router.isReady().then(() => {
   app.mount('#app');

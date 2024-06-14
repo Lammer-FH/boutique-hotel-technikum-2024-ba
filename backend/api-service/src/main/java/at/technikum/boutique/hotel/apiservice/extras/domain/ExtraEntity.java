@@ -15,6 +15,7 @@ import lombok.ToString;
 public class ExtraEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
     @Column(nullable = false, columnDefinition = "TINYTEXT")

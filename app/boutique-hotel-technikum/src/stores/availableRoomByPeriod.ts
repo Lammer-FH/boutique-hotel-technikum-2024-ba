@@ -1,7 +1,7 @@
 import {Room} from "@/network/Room";
 import {defineStore} from "pinia";
 import CancellationTokenCreator from "@/utils/CancellationTokenCreator";
-import {getRoomsByPeriod} from "@/network/Rooms";
+import {getRoomsByPeriod} from "@/network/getRooms";
 
 const arrival = new Date();
 const departure = new Date();
@@ -35,7 +35,7 @@ export const useAvailableRoomsByPeriodStore = defineStore({
             try  {
                 this.state = ERoomSearchState.Loading;
                 const token = cancellationTokenCreator.cancelOldAndGetNewToken();
-                const roomResponse = await getRoomsByPeriod(this.pages, new Date(this.arrival), new Date(this.departure));
+                const roomResponse = await getRoomsByPeriod(this.currentPage, new Date(this.arrival), new Date(this.departure));
                 if (token.cancelled) { return; }
 
                 this.state = ERoomSearchState.Loaded;

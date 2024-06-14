@@ -6,9 +6,6 @@
 </template>
 
 <script lang="ts">
-import {addIcons} from "ionicons";
-import {thermometer, tv, water, wine} from "ionicons/icons";
-
 export type Extra = {
   icon: string,
   name: string

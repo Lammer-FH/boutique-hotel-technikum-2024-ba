@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -19,6 +19,7 @@ import java.util.Date;
 public class BookingEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "breakfast", nullable = false)
@@ -33,10 +34,10 @@ public class BookingEntity {
     private Date endDate;
 
     @ManyToOne
-    @JoinColumn(name = "room_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
     private RoomEntity room;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private CustomerEntity customer;
 }
