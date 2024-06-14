@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import Room from "./Room"
+import {Room} from "@/network/Room";
 
 export const useBookingStore = defineStore({
     id: 'booking',
@@ -13,11 +13,17 @@ export const useBookingStore = defineStore({
         breakfast: true
     }),
     getters: {
-        prettyArrival: (state) => {
+        prettyArrival(state) {
             return state.arrival?.toLocaleDateString()
         },
-        prettyDeparture: (state) => {
+        prettyDeparture(state) {
             return state.departure?.toLocaleDateString();
+        },
+        isRoomValid(state): boolean {
+            return !!(state.arrival && state.departure && state.room);
+        },
+        isBookingValid(state): boolean {
+            return this.isRoomValid && !!(state.firstName && state.lastName && state.eMail);
         }
     }
 })

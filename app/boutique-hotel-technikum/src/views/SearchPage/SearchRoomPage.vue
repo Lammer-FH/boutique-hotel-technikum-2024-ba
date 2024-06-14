@@ -4,7 +4,7 @@
       <RoomOverview v-for="room in availableRooms.rooms" :room="room">
         <ion-button @click="showCalendarFor = room.id">Verfügbarkeit prüfen</ion-button>
       </RoomOverview>
-      <BoutiqueCalendar v-if="showCalendarFor" @finished="showCalendarFor = undefined"/>
+      <BoutiqueCalendar v-if="showCalendarFor" :room-id="showCalendarFor" @finished="showCalendarFor = undefined"/>
     </ion-content>
 
     <ion-content v-else>
@@ -25,7 +25,7 @@
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import TheRoomPagination from "@/components/RoomOverview/TheRoomPagination.vue";
 import BoutiqueCalendar from "@/components/UI/BoutiqueCalendar.vue";
-import {useAvailableRoomsStore} from "@/store/availableRooms";
+import {useAvailableRoomsStore} from "@/stores/availableRooms";
 
 export default {
   components: {
@@ -41,6 +41,9 @@ export default {
   },
   created() {
     this.availableRooms.fetchRooms();
+  },
+  beforeRouteLeave() {
+    this.showCalendarFor = undefined;
   }
 }
 </script>

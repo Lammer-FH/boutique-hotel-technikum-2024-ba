@@ -5,7 +5,7 @@
         <ion-row class="ion-justify-content-end">
           <ion-button
             color="danger"
-            @click="back()">
+            router-link="/booking">
             Zurück
           </ion-button>
         </ion-row>
@@ -25,7 +25,7 @@
         </ion-row>
 
         <ion-row>
-          <RoomOverview v-bind="booking.room!"/>
+          <RoomOverview v-if="booking.room" :room="booking.room"/>
         </ion-row>
 
         <ion-row class="ion-justify-content-center">
@@ -53,8 +53,8 @@
         </ion-row>
 
         <ion-row>
-          <ion-button class="confirm">
-            Zahlungspflichtig bestellen
+          <ion-button class="confirm" @click="tryBooking">
+            Zahlungspflichtig buchen
           </ion-button>
         </ion-row>
       </ion-grid>
@@ -67,36 +67,62 @@ import {useIonRouter} from "@ionic/vue";
 import {useBookingStore} from "@/stores/booking";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import {formatMoney} from "@/utils/Formatter";
+import {RouteLocationNormalized} from "vue-router";
+import bookRoom from "@/network/bookRoom";
+
+export function BookingOverviewPageNavigationGuard(to: RouteLocationNormalized) {
+  const booking = useBookingStore();
+
+  if (to.fullPath === "/booking-overview" && !booking.isBookingValid) {
+    return "/search/period";
+  }
+
+  return true;
+}
 
 export default {
   components: {RoomOverview},
-  setup() {
-    const booking = useBookingStore();
-    const router = useIonRouter();
-
+  data() {
     return {
-      booking,
-      router
+      booking: useBookingStore(),
+      router: useIonRouter(),
+      booked: false
     }
   },
   computed: {
-    validData() {
-      return this.booking.arrival && this.booking.departure && this.booking.room && this.booking.firstName && this.booking.lastName && this.booking.eMail && this.booking.breakfast;
-    },
     overnightStays() {
-      return this.booking.departure!.getDay() -this.booking.arrival!.getDay();
+      return this.booking.departure!.getDate() - this.booking.arrival!.getDate();
     }
   },
   methods: {
     formatMoney,
-    back() {
-      this.router.navigate("/booking");
+    async tryBooking() {
+      try {
+        await bookRoom(
+            this.booking!.room!.id,
+            {
+              firstName: this.booking.firstName,
+              secondName: this.booking.lastName,
+              email: this.booking.eMail,
+              birthDate: "1995-01-01"
+            },
+            this.booking.breakfast,
+            {
+              start: this.booking.arrival!.toISOString().slice(0, 10),
+              end: this.booking.departure!.toISOString().slice(0, 10)
+            });
+
+        this.router.push("/home");
+      } catch (e) {
+        console.error(e);
+      }
     }
   },
-  beforeCreate() {
-    if (!this.validData) {
-      this.router.navigate("/search/period");
+  unmounted() {
+    if (!this.booked) {
+      return;
     }
+    this.booking.room = undefined;
   }
 }
 </script>

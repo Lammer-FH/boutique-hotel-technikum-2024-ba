@@ -5,7 +5,7 @@
         <ion-row class="ion-justify-content-end">
           <ion-button
               color="danger"
-              @click="cancel()"
+              router-link="/search/period"
           >Abbrechen</ion-button>
         </ion-row>
         <ion-row>
@@ -24,9 +24,7 @@
         </ion-row>
 
         <ion-row>
-          <RoomOverview v-bind="booking.room!">
-            <ion-button class="change-room">Zeitraum/Zimmer ändern</ion-button>
-          </RoomOverview>
+          <RoomOverview :room="booking.room!"/>
         </ion-row>
       </ion-grid>
 
@@ -40,26 +38,30 @@ import {useBookingStore} from "@/stores/booking";
 import {useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import TheBookingForm from "@/views/BookingPage/TheBookingForm.vue";
+import {NavigationGuardNext, RouteLocationNormalized} from "vue-router";
+
+export function BookingPageNavigationGuard(to: RouteLocationNormalized, from: RouteLocationNormalized) {
+  const booking = useBookingStore();
+
+  if (to.fullPath === "/booking" && !booking.isRoomValid) {
+    return "/search/period";
+  }
+
+  return true;
+}
 
 export default {
   components: {RoomOverview, TheBookingForm},
   setup() {
     const booking = useBookingStore();
     const router = useIonRouter();
+
     return {
       router,
       booking
     }
   },
-  computed: {
-    validData() {
-      return this.booking.arrival && this.booking.departure && this.booking.room;
-    }
-  },
   methods: {
-    cancel() {
-      this.router.navigate("/search/period");
-    },
     toOverviewPage(inputs: {
       firstName: string,
       lastName: string,
@@ -71,12 +73,7 @@ export default {
       this.booking.eMail = inputs.eMail;
       this.booking.breakfast = inputs.breakfast === "yes";
 
-      this.router.navigate("/booking-overview");
-    }
-  },
-  beforeCreate() {
-    if (!this.validData) {
-      this.router.navigate("/search/period");
+      this.router.push("/booking-overview");
     }
   }
 }

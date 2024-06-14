@@ -4,15 +4,17 @@ import router from './router';
 
 import {
   IonButton,
-  IonButton,
   IonCol,
-  IonContent, IonFooter, IonFooter,
+  IonContent,
+  IonFooter,
   IonGrid,
-  IonHeader, IonIcon,
+  IonHeader,
+  IonIcon,
   IonicVue,
   IonImg,
   IonPage,
-  IonRow, IonText,
+  IonRow,
+  IonText,
   IonTitle,
   IonToolbar
 } from '@ionic/vue';
@@ -53,7 +55,6 @@ import IonRowCol from "@/components/UI/IonRowCol.vue";
 const app = createApp(App)
   .use(IonicVue)
   .use(createPinia())
-  .use(createPinia())
   .use(router);
 
 app.component("IonPage", IonPage)
@@ -67,10 +68,10 @@ app.component("IonPage", IonPage)
     .component("IonGrid", IonGrid)
     .component("IonRow", IonRow)
     .component("IonCol", IonCol)
+    .component("IonText", IonText)
     .component("IonButton", IonButton)
-    .component("IonRowCol", IonRowCol);
-
-app.component("BoutiqueHeader", BoutiqueHeader);
+    .component("IonRowCol", IonRowCol)
+    .component("BoutiqueHeader", BoutiqueHeader);
 
 router.isReady().then(() => {
   app.mount('#app');
