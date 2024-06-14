@@ -5,7 +5,8 @@
         <ion-row class="ion-justify-content-end">
           <ion-button
             color="danger"
-            router-link="/booking">
+            router-link="/booking"
+            router-direction="back">
             Zurück
           </ion-button>
         </ion-row>
@@ -24,39 +25,19 @@
           <ion-text>Abreise: <span>{{ booking.prettyDeparture }}</span></ion-text>
         </ion-row>
 
-        <ion-row>
-          <RoomOverview v-if="booking.room" :room="booking.room"/>
+        <ion-row v-if="booking.room">
+          <RoomOverview :room="booking.room"/>
         </ion-row>
 
         <ion-row class="ion-justify-content-center">
           <h1>{{ `${overnightStays} ${overnightStays === 1 ? "Nacht" : "Nächte"}: ${formatMoney(overnightStays * booking.room!.price)}` }}</h1>
         </ion-row>
 
-        <ion-row>
-          <h1>Ihre Kontaktdaten:</h1>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-end">Vorname:</ion-col>
-          <ion-col>{{ booking.firstName }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-end">Nachname:</ion-col>
-          <ion-col>{{ booking.lastName }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-end">E-Mail:</ion-col>
-          <ion-col>{{ booking.eMail }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-end">Frühstück:</ion-col>
-          <ion-col>{{ booking.breakfast ? "Ja" : "Nein" }}</ion-col>
-        </ion-row>
+        <ContactData/>
 
-        <ion-row>
-          <ion-button class="confirm" @click="tryBooking">
-            Zahlungspflichtig buchen
-          </ion-button>
-        </ion-row>
+        <ion-button class="confirm" @click="tryBooking" expand="block">
+          Zahlungspflichtig buchen
+        </ion-button>
       </ion-grid>
     </ion-content>
   </ion-page>
@@ -69,6 +50,7 @@ import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import {formatMoney} from "@/utils/Formatter";
 import {RouteLocationNormalized} from "vue-router";
 import bookRoom from "@/network/bookRoom";
+import ContactData from "@/components/ContactData.vue";
 
 export function BookingOverviewPageNavigationGuard(to: RouteLocationNormalized) {
   const booking = useBookingStore();
@@ -81,7 +63,7 @@ export function BookingOverviewPageNavigationGuard(to: RouteLocationNormalized) 
 }
 
 export default {
-  components: {RoomOverview},
+  components: {ContactData, RoomOverview},
   data() {
     return {
       booking: useBookingStore(),
@@ -112,23 +94,12 @@ export default {
               end: this.booking.departure!.toISOString().slice(0, 10)
             });
 
-        this.router.push("/home");
+        this.booking.status = "booked";
+        this.router.replace("/confirmation");
       } catch (e) {
         console.error(e);
       }
     }
-  },
-  unmounted() {
-    if (!this.booked) {
-      return;
-    }
-    this.booking.room = undefined;
   }
 }
 </script>
-
-<style scoped>
-ion-button.confirm {
-  width: 100%;
-}
-</style>

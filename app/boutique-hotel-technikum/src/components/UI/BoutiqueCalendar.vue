@@ -86,7 +86,9 @@ export default {
     highlightedDates(isoString: string) {
       //TODO Use the data from the backand to whether the Day is available or not
       const date = new Date(isoString);
-      if (date < new Date()) { return; }
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() -1);
+      if (date < yesterday) { return; }
 
       return {
         backgroundColor: isBooked(date, this.availabilities) ? "red" : "green"

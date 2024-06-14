@@ -6,6 +6,7 @@
           <ion-button
               color="danger"
               router-link="/search/period"
+              router-direction="back"
           >Abbrechen</ion-button>
         </ion-row>
         <ion-row>
@@ -52,13 +53,10 @@ export function BookingPageNavigationGuard(to: RouteLocationNormalized, from: Ro
 
 export default {
   components: {RoomOverview, TheBookingForm},
-  setup() {
-    const booking = useBookingStore();
-    const router = useIonRouter();
-
+  data() {
     return {
-      router,
-      booking
+      booking: useBookingStore(),
+      router: useIonRouter()
     }
   },
   methods: {

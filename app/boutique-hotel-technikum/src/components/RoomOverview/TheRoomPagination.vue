@@ -70,10 +70,10 @@ export default {
       return pages.slice(startIndex, endIndex);
     },
     cropBefore() {
-      return this.shownPages[0] !== 1;
+      return this.shownPages.length > 0 && this.shownPages[0] !== 1;
     },
     cropAfter() {
-      return this.shownPages[this.shownPages.length - 1] !== this.pageObject.pages;
+      return this.shownPages.length > 0 && this.shownPages[this.shownPages.length - 1] !== this.pageObject.pages;
     }
   },
   methods: {

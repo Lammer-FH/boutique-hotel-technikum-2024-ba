@@ -4,6 +4,7 @@ import {Room} from "@/network/Room";
 export const useBookingStore = defineStore({
     id: 'booking',
     state: () => ({
+        status: "booking" as "booking" | "booked",
         arrival: undefined as Date | undefined,
         departure: undefined as Date | undefined,
         room: undefined as Room | undefined,

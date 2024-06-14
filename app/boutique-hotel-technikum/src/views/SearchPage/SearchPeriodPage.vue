@@ -40,12 +40,12 @@
 
         <IonRowCol v-if="availableRooms.state === ERoomSearchState.Loaded" v-for="room in availableRooms.rooms">
           <RoomOverview :room="room">
-            <ion-button router-link="/booking" @click="goToBooking(room)">Buchen</ion-button>
+            <ion-button router-link="/booking" router-direction="forward" @click="goToBooking(room)">Buchen</ion-button>
           </RoomOverview>
         </IonRowCol>
 
         <IonRowCol v-if="noAvailableRooms">
-          Leider sind keien Freien Zimmer während dieses Zeitraumes mehr verfügbar...
+          Leider sind während dieses Zeitraums keine freien Zimmer mehr verfügbar...
         </IonRowCol>
 
         <IonRowCol v-if="availableRooms.state === ERoomSearchState.Loading">
