@@ -1,9 +1,13 @@
 <template>
   <ion-row>
-    <ion-text>Anreise: <span>{{ booking.prettyArrival }}</span></ion-text>
+    <ion-col>
+      <ion-text>Anreise: <span>{{ booking.prettyArrival }}</span></ion-text>
+    </ion-col>
   </ion-row>
   <ion-row>
-    <ion-text>Abreise: <span>{{ booking.prettyDeparture }}</span></ion-text>
+    <ion-col>
+      <ion-text>Abreise: <span>{{ booking.prettyDeparture }}</span></ion-text>
+    </ion-col>
   </ion-row>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <ion-header>
+  <ion-header class="app-header">
     <ion-toolbar>
       <ion-title v-if="title">{{ title }}</ion-title>
       <slot v-else></slot>

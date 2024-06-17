@@ -1,6 +1,9 @@
 <template>
   <ion-row class="ion-align-items-center">
-    <ion-col class="ion-text-end">{{ description }}</ion-col>
+    <ion-col>{{ description }}</ion-col>
+  </ion-row>
+
+  <ion-row>
     <ion-col>
       <slot></slot>
     </ion-col>

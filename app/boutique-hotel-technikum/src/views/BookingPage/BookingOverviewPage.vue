@@ -1,23 +1,18 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-grid>
-        <ion-row class="ion-justify-content-end">
-          <ion-button
-            color="danger"
-            router-link="/booking"
-            router-direction="back">
-            Zurück
-          </ion-button>
-        </ion-row>
-        <ion-row>
-          <h1>Buchungsübersicht</h1>
-        </ion-row>
-      </ion-grid>
-    </ion-header>
+    <BoutiqueHeader>
+      <ion-title>Buchungsübersicht</ion-title>
+      <ion-buttons slot="end">
+        <ion-button 
+              color="danger"
+              router-link="/booking"
+              router-direction="back"
+          >Zurück</ion-button>
+      </ion-buttons>
+    </BoutiqueHeader>
 
     <ion-content>
-      <ion-grid>
+      <ion-grid fixed>
         <BookingPeriod/>
 
         <ion-row v-if="booking.room">
@@ -25,7 +20,7 @@
         </ion-row>
 
         <ion-row class="ion-justify-content-center">
-          <h1>{{ priceText }}</h1>
+          <ion-col><h2>{{ priceText }}</h2></ion-col>
         </ion-row>
 
         <ContactData/>
@@ -49,6 +44,7 @@ import bookRoom from "@/network/bookRoom";
 import ContactData from "@/components/ContactData.vue";
 import BookingPeriod from "@/components/BookingPeriod.vue";
 import {useCustomerStore} from "@/stores/customer";
+import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
 export function BookingOverviewPageNavigationGuard(to: RouteLocationNormalized) {
   const booking = useBookingStore();
@@ -62,7 +58,7 @@ export function BookingOverviewPageNavigationGuard(to: RouteLocationNormalized) 
 }
 
 export default {
-  components: {BookingPeriod, ContactData, RoomOverview},
+  components: {BookingPeriod, ContactData, RoomOverview, BoutiqueHeader},
   data() {
     return {
       booking: useBookingStore(),

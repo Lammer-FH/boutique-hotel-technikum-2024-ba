@@ -4,40 +4,62 @@
       <BoutiqueHeader title="Buchungsbestätigung"/>
 
       <ion-content>
-        <ion-grid>
+        <ion-grid fixed>
           <ion-row>
-            <h1>Vielen dank für Ihre Reservierung, wir haben Ihre Buchung erhalten!</h1>
+            <ion-col><h2>Vielen dank für Ihre Reservierung, wir haben Ihre Buchung erhalten!</h2></ion-col>
           </ion-row>
 
-         <BookingPeriod/>
+          <BookingPeriod/>
 
           <ion-row>
-            <RoomOverview :room="booking.room"/>
+            <ion-col size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+              <RoomOverview :room="booking.room"/>
+            </ion-col>
+            <ion-col size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+
+              <ContactData/>
+
+              <template v-if="customer.hasAnyAddressInfo">
+                <ion-row>
+                  <ion-col><h3>Anfahrt:</h3></ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col>
+                    <iframe
+                        width="450"
+                        height="250"
+                        style="border:0"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        :src="`https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=${customer.addressToString}&destination=1200+Wien`">
+                    </iframe>
+                  </ion-col>
+                </ion-row>
+              </template>
+              
+              <ion-row>
+                <ion-col><h3>Kontakt:</h3></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <span class="bold">E-Mail:&nbsp;</span><a :href="telephoneHref()">{{ eMail() }}</a>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <span class="bold">Telefon:&nbsp;</span><a :href="eMailHref()">{{ telephone() }}</a>
+                </ion-col>
+              </ion-row>
+            </ion-col>
           </ion-row>
 
-          <ContactData/>
 
-          <template v-if="customer.hasAnyAddressInfo">
-            <ion-row>
-              <h1>Anfahrt:</h1>
-            </ion-row>
+          
 
-            <ion-row>
-              <iframe
-                  width="450"
-                  height="250"
-                  style="border:0"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  :src="`https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=${customer.addressToString}&destination=1200+Wien`">
-              </iframe>
-            </ion-row>
-          </template>
-
-          <ion-row><h1>Kontakt:</h1></ion-row>
-          <ion-row>E-Mail:&nbsp;<a :href="telephoneHref()">{{ eMail() }}</a></ion-row>
-          <ion-row>Telefon:&nbsp;<a :href="eMailHref()">{{ telephone() }}</a></ion-row>
+          
         </ion-grid>
       </ion-content>
+
     </template>
 
     <template v-if="booking.state === EBookingState.ROOM_NOT_AVAILABLE_ERROR">
@@ -109,3 +131,21 @@ export default {
   }
 }
 </script>
+<style scoped>
+.bold {
+  font-weight: bold;
+}
+@media print {
+  .tab-bar {
+    display: none !important;
+  }
+
+  .app-header {
+    display: none !important;
+  }
+
+  .container {
+    padding: 0px !important;
+  }
+}
+</style>

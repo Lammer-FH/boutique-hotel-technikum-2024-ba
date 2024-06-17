@@ -1,7 +1,7 @@
 <template>
-  <ion-grid>
+  <ion-grid fixed>
     <ion-row>
-      <h1>Ihre Kontaktdaten</h1>
+      <h2>Ihre Kontaktdaten</h2>
     </ion-row>
 
     <BookingFormRow
@@ -50,7 +50,9 @@
       </ion-radio-group >
     </BookingFormRow>
 
-    <ion-row><h1>Adresse für Anfahrt (optional)</h1></ion-row>
+    <ion-row>
+      <h2>Adresse für Anfahrt (optional)</h2>
+    </ion-row>
     <BookingFormRow
       description="Straße:">
       <ion-input
