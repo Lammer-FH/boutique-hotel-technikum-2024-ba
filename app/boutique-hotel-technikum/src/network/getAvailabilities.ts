@@ -2,7 +2,7 @@ import {AvailabilityResponse} from "@/network/dtos/AvailabilityResponse";
 import axios from "axios";
 
 export async function getAvailabilities(roomId: number, start: Date, end: Date) {
-    const data = (await axios.get<AvailabilityResponse>(
+    return (await axios.get<AvailabilityResponse>(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/rooms/${roomId}/booked`,
         {
             params: {
@@ -10,6 +10,4 @@ export async function getAvailabilities(roomId: number, start: Date, end: Date) 
                 end: end.toISOString().slice(0, 10)
             }
         })).data;
-    console.log(data);
-    return data;
 }

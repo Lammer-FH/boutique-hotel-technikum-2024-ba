@@ -42,7 +42,7 @@
       <div class="center">
         <div class="background">
           <div>Ein Fehler beim Laden der Verfügbarkeit ist aufgetreten, bitte versuche es später erneut!</div>
-          <ion-button @click="$emit('finished')">Zurück</ion-button>
+          <ion-button @click="$emit('finished')" expand="block">Zurück</ion-button>
         </div>
       </div>
     </ion-content>

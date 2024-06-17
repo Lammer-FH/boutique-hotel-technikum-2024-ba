@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TheNavigation.vue'
 import {BookingPageNavigationGuard} from "@/views/BookingPage/BookingPage.vue";
 import {beforeEach} from "vitest";
-import {BookingOverviewPageNavigationGuard} from "@/views/BookingPage/BookingOverviewPage/BookingOverviewPage.vue";
+import {BookingOverviewPageNavigationGuard} from "@/views/BookingPage/BookingOverviewPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
         children: [
           {
             path: '',
-            redirect: 'search/room'
+            redirect: 'search/period'
           },
           {
             path: 'room',
@@ -43,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'booking-overview',
-        component: () => import('@/views/BookingPage/BookingOverviewPage/BookingOverviewPage.vue')
+        component: () => import('@/views/BookingPage/BookingOverviewPage.vue')
       },
       {
         path: 'confirmation',

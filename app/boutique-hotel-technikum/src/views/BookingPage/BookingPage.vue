@@ -39,8 +39,9 @@ import {useBookingStore} from "@/stores/booking";
 import {useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import TheBookingForm from "@/views/BookingPage/TheBookingForm.vue";
-import {NavigationGuardNext, RouteLocationNormalized} from "vue-router";
+import {RouteLocationNormalized} from "vue-router";
 import {Address} from "@/stores/dataStructures/CustomerInfo";
+import {useCustomerStore} from "@/stores/customer";
 
 export function BookingPageNavigationGuard(to: RouteLocationNormalized, from: RouteLocationNormalized) {
   const booking = useBookingStore();
@@ -57,6 +58,7 @@ export default {
   data() {
     return {
       booking: useBookingStore(),
+      customer: useCustomerStore(),
       router: useIonRouter()
     }
   },
@@ -65,23 +67,16 @@ export default {
       firstName: string,
       lastName: string,
       eMail: string,
-      breakfast: "yes" | "no",
+      breakfast: boolean,
       address: Address
     }) {
-      this.booking.firstName = inputs.firstName;
-      this.booking.lastName = inputs.lastName;
-      this.booking.eMail = inputs.eMail;
-      this.booking.breakfast = inputs.breakfast === "yes";
-      this.booking.address = inputs.address
+      this.customer.setName(inputs.firstName, inputs.lastName);
+      this.customer.setEMail(inputs.eMail);
+      this.customer.setAddress(inputs.address);
 
+      this.booking.setBreakfast(inputs.breakfast);
       this.router.push("/booking-overview");
     }
   }
 }
 </script>
-
-<style scoped>
-ion-button.change-room {
-  width: 100%;
-}
-</style>

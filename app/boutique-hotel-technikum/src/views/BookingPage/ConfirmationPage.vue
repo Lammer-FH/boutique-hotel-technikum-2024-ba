@@ -16,18 +16,21 @@
 
         <ContactData/>
 
-        <ion-row>
-          <h1>Anfahrt:</h1>
-        </ion-row>
-        <ion-row>
-          <iframe
-              width="450"
-              height="250"
-              style="border:0"
-              referrerpolicy="no-referrer-when-downgrade"
-              :src="`https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=${booking.totalAddress}&destination=1200+Wien`">
-          </iframe>
-        </ion-row>
+        <template v-if="customer.hasAnyAddressInfo">
+          <ion-row>
+            <h1>Anfahrt:</h1>
+          </ion-row>
+
+          <ion-row>
+            <iframe
+                width="450"
+                height="250"
+                style="border:0"
+                referrerpolicy="no-referrer-when-downgrade"
+                :src="`https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=${customer.addressToString}&destination=1200+Wien`">
+            </iframe>
+          </ion-row>
+        </template>
 
         <ion-row><h1>Kontakt:</h1></ion-row>
         <ion-row>E-Mail: <a :href="telephoneHref()">{{ eMail() }}</a></ion-row>
@@ -38,18 +41,20 @@
 </template>
 
 <script lang="ts">
-import {useBookingStore} from "@/stores/booking";
+import {EBookingState, useBookingStore} from "@/stores/booking";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 import BookingPeriod from "@/components/BookingPeriod.vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import ContactData from "@/components/ContactData.vue";
 import {eMail, eMailHref, telephone, telephoneHref} from "@/utils/ContactData";
+import {useCustomerStore} from "@/stores/customer";
 
 export default {
   components: {ContactData, RoomOverview, BookingPeriod, BoutiqueHeader},
   data() {
     return {
-      booking: useBookingStore()
+      booking: useBookingStore(),
+      customer: useCustomerStore()
     }
   },
   computed: {
@@ -68,7 +73,7 @@ export default {
     eMail() { return eMail }
   },
   unmounted(){
-    this.booking.status = "booking";
+    this.booking.status = EBookingState.BOOKING;
     this.booking.room = undefined;
   }
 }

@@ -3,11 +3,11 @@
     <ion-tabs>
       <ion-header>
         <ion-tab-bar slot="bottom">
-          <ion-tab-button tab="room" href="/search/room">
-            <ion-label>Zimmer</ion-label>
-          </ion-tab-button>
           <ion-tab-button tab="period" href="/search/period">
             <ion-label>Zeitraum</ion-label>
+          </ion-tab-button>
+          <ion-tab-button tab="room" href="/search/room">
+            <ion-label>Zimmer</ion-label>
           </ion-tab-button>
         </ion-tab-bar>
       </ion-header>
