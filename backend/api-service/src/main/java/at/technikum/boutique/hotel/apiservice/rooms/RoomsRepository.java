@@ -15,8 +15,8 @@ import java.time.LocalDate;
 public interface RoomsRepository extends JpaRepository<RoomEntity, Integer>, JpaSpecificationExecutor<RoomEntity> {
 
     @Query(value = "SELECT r FROM RoomEntity r LEFT OUTER JOIN  BookingEntity b ON r.id = b.room.id " +
-            "AND b.endDate >= :#{#start} " +
-            "AND b.startDate <= :#{#end} " +
+            "AND b.endDate > :#{#start} " +
+            "AND b.startDate < :#{#end} " +
             "WHERE b.room IS NULL"
     )
     Page<RoomEntity> findAllAvailableRooms(@Param("start") LocalDate availabilityPeriodStart, @Param("end") LocalDate availabilityPeriodEnd, Pageable pageable);

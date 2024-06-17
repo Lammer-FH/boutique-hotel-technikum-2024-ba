@@ -15,7 +15,9 @@ public interface BookingsRepository extends JpaRepository<BookingEntity, Integer
 
     @Query(value = "SELECT b FROM BookingEntity b" +
             "    WHERE b.room.id = :#{#roomId} " +
-            "        AND b.endDate >= :#{#start} " +
-            "        AND b.startDate <= :#{#end} ")
+            "        AND b.endDate > :#{#start} " +
+            "        AND b.startDate < :#{#end} ")
     List<BookingEntity> getBookingsForRoomWithinPeriod(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("roomId") Integer roomId);
+
+
 }
