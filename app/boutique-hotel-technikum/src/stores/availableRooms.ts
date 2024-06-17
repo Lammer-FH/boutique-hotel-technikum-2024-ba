@@ -21,6 +21,7 @@ export const useAvailableRoomsStore = defineStore({
         },
         async fetchRooms() {
             try {
+                this.fetchError = false;
                 const token = cancellationTokenCreator.cancelOldAndGetNewToken();
                 const roomResponse = await getRooms(this.currentPage);
                 if (token.cancelled) { return; }

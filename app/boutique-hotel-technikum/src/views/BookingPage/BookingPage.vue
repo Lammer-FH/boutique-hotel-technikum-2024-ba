@@ -17,12 +17,7 @@
 
     <ion-content>
       <ion-grid>
-        <ion-row>
-          <ion-text>Anreise: <span>{{ booking.prettyArrival }}</span></ion-text>
-        </ion-row>
-        <ion-row>
-          <ion-text>Abreise: <span>{{ booking.prettyDeparture }}</span></ion-text>
-        </ion-row>
+        <BookingPeriod/>
 
         <ion-row>
           <RoomOverview :room="booking.room!"/>
@@ -42,6 +37,7 @@ import TheBookingForm from "@/views/BookingPage/TheBookingForm.vue";
 import {RouteLocationNormalized} from "vue-router";
 import {Address} from "@/stores/dataStructures/CustomerInfo";
 import {useCustomerStore} from "@/stores/customer";
+import BookingPeriod from "@/components/BookingPeriod.vue";
 
 export function BookingPageNavigationGuard(to: RouteLocationNormalized, from: RouteLocationNormalized) {
   const booking = useBookingStore();
@@ -54,7 +50,7 @@ export function BookingPageNavigationGuard(to: RouteLocationNormalized, from: Ro
 }
 
 export default {
-  components: {RoomOverview, TheBookingForm},
+  components: {BookingPeriod, RoomOverview, TheBookingForm},
   data() {
     return {
       booking: useBookingStore(),

@@ -1,6 +1,5 @@
 <template>
   <ion-page>
-
     <ion-header>
       <ion-grid>
         <ion-row class="ion-justify-content-end">

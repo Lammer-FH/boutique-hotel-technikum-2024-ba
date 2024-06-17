@@ -8,13 +8,17 @@
           <h1>Vielen dank für Ihre Reservierung, wir haben Ihre Buchung erhalten!</h1>
         </ion-row>
 
-        <BookingPeriod/>
+       <BookingPeriod/>
 
         <ion-row v-if="booking.room">
-          <RoomOverview :room="booking.room" :showImages="false"/>
+          <RoomOverview :room="booking.room"/>
         </ion-row>
 
-        <ContactData/>
+        <ion-col>
+          <ContactData/>
+        </ion-col>
+
+
 
         <template v-if="customer.hasAnyAddressInfo">
           <ion-row>
@@ -48,6 +52,18 @@ import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import ContactData from "@/components/ContactData.vue";
 import {eMail, eMailHref, telephone, telephoneHref} from "@/utils/ContactData";
 import {useCustomerStore} from "@/stores/customer";
+import {RouteLocationNormalized} from "vue-router";
+
+export function ConfirmationPageNavigationGuard(to: RouteLocationNormalized, from: RouteLocationNormalized) {
+  const booking = useBookingStore();
+  const customer = useCustomerStore();
+
+  if (to.fullPath === "/confirmation" && (!booking.isRoomValid || !customer.isValid)) {
+    return "/search/period";
+  }
+
+  return true;
+}
 
 export default {
   components: {ContactData, RoomOverview, BookingPeriod, BoutiqueHeader},
@@ -73,7 +89,7 @@ export default {
     eMail() { return eMail }
   },
   unmounted(){
-    this.booking.status = EBookingState.BOOKING;
+    this.booking.setState(EBookingState.BOOKING);
     this.booking.room = undefined;
   }
 }
