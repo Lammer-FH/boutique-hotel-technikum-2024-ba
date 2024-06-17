@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {Room} from "@/network/Room";
+import {Room} from "@/network/dtos/Room";
 
 export const useBookingStore = defineStore({
     id: 'booking',
@@ -11,6 +11,12 @@ export const useBookingStore = defineStore({
         firstName: "",
         lastName: "",
         eMail: "",
+        address: {
+            street: "",
+            postCode: undefined as number | undefined,
+            city: "",
+            country: ""
+        },
         breakfast: true
     }),
     getters: {
@@ -25,6 +31,13 @@ export const useBookingStore = defineStore({
         },
         isBookingValid(state): boolean {
             return this.isRoomValid && !!(state.firstName && state.lastName && state.eMail);
+        },
+        isAddressValid(state): boolean {
+            return !!(state.address.street || state.address.postCode || state.address.city || state.address.country)
+        },
+        totalAddress(state) {
+            const a = state.address;
+            return `${a.street}, ${a.postCode} ${a.city}, ${a.country}`;
         }
     }
 })

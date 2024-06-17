@@ -1,4 +1,4 @@
-import {DatePeriod, Period} from "@/network/Booking";
+import {DatePeriod, Period} from "@/network/dtos/Booking";
 
 export function periodToDatePeriod(period: Period): DatePeriod {
     return {
@@ -12,7 +12,7 @@ export function isBooked(date: Date, booked: DatePeriod[]) {
         if (period.start > date) {
             return false;
         }
-        if (period.end > date && period.start < date) {
+        if (period.end > date && period.start <= date) {
             return true;
         }
     }

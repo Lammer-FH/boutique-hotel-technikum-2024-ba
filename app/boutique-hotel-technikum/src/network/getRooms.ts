@@ -1,6 +1,6 @@
 import axios from "axios";
 import Guard from "../utils/Guard"
-import RoomResponse from "@/network/RoomResponse";
+import RoomResponse from "@/network/dtos/RoomResponse";
 
 export async function getRooms(page: number, pageSize: number = 5): Promise<RoomResponse> {
     Guard.against.less(page, 1);
@@ -34,5 +34,6 @@ export async function getRoomsByPeriod(page: number, start: Date, end: Date, pag
             timeout: 3000
         }
     );
+    console.log(response);
     return response.data;
 }

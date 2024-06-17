@@ -4,7 +4,7 @@
       <div class="container">
         <h1>{{ room.title }}</h1>
 
-        <section class="dia">
+        <section v-if="showImages" class="dia">
           <ImageDiaShow :images="imageObject"></ImageDiaShow>
         </section>
 
@@ -29,7 +29,7 @@
 <script lang="ts">
 import {formatMoney} from "@/utils/Formatter";
 import RoomExtra, { Extra } from "@/components/RoomOverview/RoomExtra.vue";
-import { type Room } from "@/network/Room";
+import { type Room } from "@/network/dtos/Room";
 import ImageDiaShow from "@/components/UI/ImageDiaShow.vue";
 import BoutiqueCalendar from "@/components/UI/BoutiqueCalendar.vue";
 import {PropType} from "vue";
@@ -42,6 +42,11 @@ export default {
     room: {
       type: Object as PropType<Room>,
       required: true
+    },
+    showImages: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   computed: {

@@ -1,3 +1,4 @@
 *.tmp
 ~$*
 *.idea/
+app/boutique-hotel-technikum/.env.development

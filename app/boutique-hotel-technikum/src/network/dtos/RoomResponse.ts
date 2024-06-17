@@ -1,7 +1,7 @@
-import {Room} from "@/network/Room";
+import {Room} from "@/network/dtos/Room";
 
 export default interface RoomResponse {
-    period: null, //TODO
+    period: null,
     rooms: Room[],
     pageNumber: number,
     pageSize: number,

@@ -70,7 +70,7 @@ import {IonDatetime, useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import {ERoomSearchState, useAvailableRoomsByPeriodStore} from "@/stores/availableRoomByPeriod";
 import TheRoomPagination from "@/components/RoomOverview/TheRoomPagination.vue";
-import {Room} from "@/network/Room";
+import {Room} from "@/network/dtos/Room";
 import {useBookingStore} from "@/stores/booking";
 
 export default {

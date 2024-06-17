@@ -40,6 +40,7 @@ import {useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import TheBookingForm from "@/views/BookingPage/TheBookingForm.vue";
 import {NavigationGuardNext, RouteLocationNormalized} from "vue-router";
+import {Address} from "@/stores/dataStructures/CustomerInfo";
 
 export function BookingPageNavigationGuard(to: RouteLocationNormalized, from: RouteLocationNormalized) {
   const booking = useBookingStore();
@@ -64,12 +65,14 @@ export default {
       firstName: string,
       lastName: string,
       eMail: string,
-      breakfast: "yes" | "no"
+      breakfast: "yes" | "no",
+      address: Address
     }) {
       this.booking.firstName = inputs.firstName;
       this.booking.lastName = inputs.lastName;
       this.booking.eMail = inputs.eMail;
       this.booking.breakfast = inputs.breakfast === "yes";
+      this.booking.address = inputs.address
 
       this.router.push("/booking-overview");
     }

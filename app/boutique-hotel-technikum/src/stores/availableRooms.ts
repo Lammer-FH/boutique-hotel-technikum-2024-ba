@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {Room} from "@/network/Room";
+import {Room} from "@/network/dtos/Room";
 import {getRooms} from "@/network/getRooms";
 import CancellationTokenCreator from "@/utils/CancellationTokenCreator";
 

@@ -47,7 +47,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'confirmation',
-        component: () => import('@/views/ConfirmationPage.vue')
+        component: () => import('@/views/BookingPage/ConfirmationPage.vue')
       },
       {
         path: 'about',
