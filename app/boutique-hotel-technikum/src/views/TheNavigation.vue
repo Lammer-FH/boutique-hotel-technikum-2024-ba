@@ -10,12 +10,12 @@
 
         <ion-tab-button tab="search" href="/search">
           <ion-icon aria-hidden="true" :icon="icons.search" />
-          <ion-label>Search</ion-label>
+          <ion-label>Suche</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="about" href="/about">
           <ion-icon aria-hidden="true" :icon="icons.informationCircle" />
-          <ion-label>About</ion-label>
+          <ion-label>Über</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="impressum" href="/impressum">

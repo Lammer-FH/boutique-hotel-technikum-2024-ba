@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <BoutiqueHeader title="About"/>
+    <BoutiqueHeader title="Über"/>
 
     <ion-content :fullscreen="true" >
       <ion-grid fixed>
