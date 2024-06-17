@@ -14,11 +14,7 @@
           <RoomOverview :room="booking.room"/>
         </ion-row>
 
-        <ion-col>
-          <ContactData/>
-        </ion-col>
-
-
+        <ContactData/>
 
         <template v-if="customer.hasAnyAddressInfo">
           <ion-row>
@@ -90,7 +86,7 @@ export default {
   },
   unmounted(){
     this.booking.setState(EBookingState.BOOKING);
-    this.booking.room = undefined;
+    this.booking.setRoom( undefined);
   }
 }
 </script>

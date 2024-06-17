@@ -108,14 +108,14 @@ export default {
     searchRooms() {
       if (this.periodInvalid) { return; }
 
-      this.availableRooms.arrival = this.searchArrival;
-      this.availableRooms.departure = this.searchDeparture;
+      this.availableRooms.setArrival(this.searchArrival);
+      this.availableRooms.setDeparture(this.searchDeparture);
       this.availableRooms.setCurrentPage(1);
     },
     goToBooking(room: Room) {
-      this.booking.arrival = new Date(this.availableRooms.arrival);
-      this.booking.departure = new Date(this.availableRooms.departure);
-      this.booking.room = room;
+      this.booking.setArrival(new Date(this.availableRooms.arrival));
+      this.booking.setDeparture(new Date(this.availableRooms.departure));
+      this.booking.setRoom(room);
     }
   }
 }

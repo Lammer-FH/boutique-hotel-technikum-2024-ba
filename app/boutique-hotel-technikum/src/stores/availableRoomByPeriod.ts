@@ -44,6 +44,15 @@ export const useAvailableRoomsByPeriodStore = defineStore({
             } catch (e) {
                 this.state = ERoomSearchState.Error;
             }
+        },
+        setState(state: ERoomSearchState) {
+            this.state = state;
+        },
+        setArrival(arrival: string) {
+            this.arrival = arrival;
+        },
+        setDeparture(departure: string) {
+            this.departure = departure
         }
     }
 })

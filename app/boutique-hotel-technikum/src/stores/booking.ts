@@ -3,7 +3,8 @@ import {Room} from "@/network/dtos/Room";
 
 export enum EBookingState {
     BOOKING,
-    BOOKED
+    BOOKED,
+    ERROR
 }
 
 export const useBookingStore = defineStore({
