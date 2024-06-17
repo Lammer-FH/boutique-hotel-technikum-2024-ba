@@ -4,6 +4,7 @@ import {Room} from "@/network/dtos/Room";
 export enum EBookingState {
     BOOKING,
     BOOKED,
+    ROOM_NOT_AVAILABLE_ERROR,
     ERROR
 }
 
@@ -37,7 +38,7 @@ export const useBookingStore = defineStore({
         setDeparture(date: Date) {
             this.departure = date;
         },
-        setRoom(room: Room) {
+        setRoom(room?: Room) {
             this.room = room;
         },
         setBreakfast(breakfast: boolean) {

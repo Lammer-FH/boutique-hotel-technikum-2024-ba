@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { IonToolbar } from '@ionic/vue';
+import {IonToolbar} from '@ionic/vue';
 import AboutPageCard from '@/components/AboutPageCard.vue';
 
 export default {

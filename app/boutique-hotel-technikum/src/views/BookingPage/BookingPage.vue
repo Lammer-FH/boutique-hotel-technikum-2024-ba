@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import {useBookingStore} from "@/stores/booking";
-import {useIonRouter} from "@ionic/vue";
+import {onIonViewWillEnter, useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import TheBookingForm from "@/views/BookingPage/TheBookingForm.vue";
 import {RouteLocationNormalized} from "vue-router";

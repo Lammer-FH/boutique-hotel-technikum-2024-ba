@@ -98,10 +98,14 @@ export default {
             });
 
         this.booking.setState(EBookingState.BOOKED);
-        this.router.replace("/confirmation");
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        if ((error as any)?.response?.status === 409) {
+          this.booking.setState(EBookingState.ROOM_NOT_AVAILABLE_ERROR);
+        } else {
+          this.booking.setState(EBookingState.ERROR);
+        }
       }
+      this.router.replace("/confirmation");
     }
   }
 }
