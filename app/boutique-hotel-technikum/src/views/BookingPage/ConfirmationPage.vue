@@ -18,20 +18,25 @@
             <ion-col size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
 
               <ContactData/>
+              <ion-row>
+                  <ion-col><h3>Anfahrt:</h3></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-text>{{ booking.room?.hotel.directions  }}</ion-text>
+                </ion-col>
+              </ion-row>
 
               <template v-if="customer.hasAnyAddressInfo">
                 <ion-row>
-                  <ion-col><h3>Anfahrt:</h3></ion-col>
-                </ion-row>
-
-                <ion-row>
                   <ion-col>
                     <iframe
-                        width="450"
+                      	class="embedded-map"
+                        width="100%"
                         height="250"
                         style="border:0"
                         referrerpolicy="no-referrer-when-downgrade"
-                        :src="`https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=${customer.addressToString}&destination=1200+Wien`">
+                        :src="`https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=${customer.addressToString}&destination=${booking.room?.hotel.address}`">
                     </iframe>
                   </ion-col>
                 </ion-row>
@@ -42,21 +47,11 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <span class="bold">E-Mail:&nbsp;</span><a :href="telephoneHref()">{{ eMail() }}</a>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <span class="bold">Telefon:&nbsp;</span><a :href="eMailHref()">{{ telephone() }}</a>
+                  <span class="bold">Telefon:&nbsp;</span><a :href="telephoneHref()">{{ booking.room?.hotel.contactPhoneNumber }}</a>
                 </ion-col>
               </ion-row>
             </ion-col>
           </ion-row>
-
-
-          
-
-          
         </ion-grid>
       </ion-content>
 
@@ -82,7 +77,7 @@ import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 import BookingPeriod from "@/components/BookingPeriod.vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import ContactData from "@/components/ContactData.vue";
-import {eMail, eMailHref, telephone, telephoneHref} from "@/utils/ContactData";
+import {eMail, telephone, telephoneHref} from "@/utils/ContactData";
 import {useCustomerStore} from "@/stores/customer";
 import {RouteLocationNormalized} from "vue-router";
 import IonRowCol from "@/components/UI/IonRowCol.vue";
@@ -117,11 +112,8 @@ export default {
     }
   },
   methods: {
-    eMailHref() {
-      return eMailHref
-    },
     telephoneHref() {
-      return telephoneHref
+      return "tel:" + this.booking.room?.hotel.contactPhoneNumber;
     },
     telephone() { return telephone },
     eMail() { return eMail }
@@ -136,14 +128,10 @@ export default {
   font-weight: bold;
 }
 @media print {
-  .tab-bar {
+  .tab-bar, .app-header, .embedded-map {
     display: none !important;
   }
-
-  .app-header {
-    display: none !important;
-  }
-
+  
   .container {
     padding: 0px !important;
   }
