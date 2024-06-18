@@ -4,9 +4,7 @@
       <h2>Ihre Kontaktdaten</h2>
     </ion-row>
 
-    <BookingFormRow
-        description="Vorname:"
-        :helper-text="valid.firstName">
+    <BookingFormRow description="Vorname:">
       <ion-input
           :class="{'ion-touched': true, 'ion-invalid': !valid.firstName}"
           placeholder="Max"
