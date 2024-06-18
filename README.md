@@ -76,5 +76,5 @@ docker build backend/api-service -f backend/api-service/Dockerfile -t boutique-h
 #### Run backend and database
 
 ```
-docker-compose -f backend/docker-compose-backend.yaml up -d
+docker-compose -f backend/docker-compose-be.yaml up -d
 ```
