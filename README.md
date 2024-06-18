@@ -27,7 +27,7 @@ Copy ```.env.development.example``` to ```.env.development``` and add your Googl
 npm run dev
 ```
 
-### Backend
+### Backend (Dev)
 
 #### Install
 
@@ -48,7 +48,7 @@ Or run install on IntelliJ IDEA Maven tab
 #### Run DB
 
 ```
-docker-compose -f ./db/docker-compose-db.yaml up
+docker-compose -f backend/docker-compose-db.yaml up -d
 ```
 
 #### Override DB Config with ENV variables
@@ -60,3 +60,21 @@ SPRING_DATASOURCE_USERNAME=<username>;SPRING_DATASOURCE_PASSWORD=<password>
 ```` 
 
 #### Run api-service
+
+### Backend (Just run)
+
+#### Generate backend Docker image
+
+ - Docker should be installed and running
+
+From the root directory of the project
+
+```
+docker build backend/api-service -f backend/api-service/Dockerfile -t boutique-hotel-api-service:latest
+```
+
+#### Run backend and database
+
+```
+docker-compose -f backend/docker-compose-backend.yaml up -d
+```
