@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import {useBookingStore} from "@/stores/booking";
-import {onIonViewWillEnter, useIonRouter} from "@ionic/vue";
+import {useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import TheBookingForm from "@/views/BookingPage/TheBookingForm.vue";
 import {RouteLocationNormalized} from "vue-router";
@@ -34,7 +34,7 @@ import {useCustomerStore} from "@/stores/customer";
 import BookingPeriod from "@/components/BookingPeriod.vue";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
-export function BookingPageNavigationGuard(to: RouteLocationNormalized, from: RouteLocationNormalized) {
+export function BookingPageNavigationGuard(to: RouteLocationNormalized) {
   const booking = useBookingStore();
 
   if (to.fullPath === "/booking" && !booking.isRoomValid) {

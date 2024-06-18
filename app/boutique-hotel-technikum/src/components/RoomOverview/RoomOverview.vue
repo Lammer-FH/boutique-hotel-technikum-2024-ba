@@ -31,12 +31,11 @@ import {formatMoney} from "@/utils/Formatter";
 import RoomExtra from "@/components/RoomOverview/RoomExtra.vue";
 import { type Room } from "@/network/dtos/Room";
 import ImageDiaShow from "@/components/UI/ImageDiaShow.vue";
-import BoutiqueCalendar from "@/components/UI/BoutiqueCalendar.vue";
 import {PropType} from "vue";
 import getIconByName from "@/components/RoomOverview/getIconByName";
 
 export default {
-  components: {BoutiqueCalendar, ImageDiaShow: ImageDiaShow, RoomExtra},
+  components: {ImageDiaShow: ImageDiaShow, RoomExtra},
   methods: {getIconByName, formatMoney},
   props: {
     room: {

@@ -5,7 +5,8 @@
       <ion-button v-if="cropBefore" shape="round" size="small">
         ...
       </ion-button>
-      <ion-button v-for="page in shownPages"
+      <ion-button v-for="(page, index) in shownPages"
+            :key="index"
             shape="round"
             size="small"
             :class="buttonClass(page)"

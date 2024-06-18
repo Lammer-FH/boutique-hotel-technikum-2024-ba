@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-content v-if="availableRooms.loaded">
-      <RoomOverview v-for="room in availableRooms.rooms" :room="room">
+      <RoomOverview v-for="room in availableRooms.rooms" :room="room" :key="room.id">
         <ion-button @click="showCalendarFor = room.id" expand="block">Verfügbarkeit prüfen</ion-button>
       </RoomOverview>
       <BoutiqueCalendar v-if="showCalendarFor" :room-id="showCalendarFor" @finished="showCalendarFor = undefined"/>

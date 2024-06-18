@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import {IonButtons, IonDatetime, IonFooter, IonText} from "@ionic/vue";
+import {IonButtons, IonDatetime, IonFooter} from "@ionic/vue";
 import {getAvailabilities} from "@/network/getAvailabilities";
 import {DatePeriod} from "@/network/dtos/Booking";
 import {periodToDatePeriod, isBooked} from "@/utils/periodHelper";
@@ -60,7 +60,6 @@ export default {
   components: {
     IonDatetime,
     IonButtons,
-    IonText,
     IonFooter
   },
   emits: ["finished"],
@@ -84,7 +83,6 @@ export default {
   },
   methods: {
     highlightedDates(isoString: string) {
-      //TODO Use the data from the backand to whether the Day is available or not
       const date = new Date(isoString);
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() -1);
@@ -106,7 +104,7 @@ export default {
               .sort((a, b) => a.start < b.start ? -1 : 1);
           this.state = "loaded";
         })
-        .catch(e => {
+        .catch(() => {
           this.state = "error"
         });
   }

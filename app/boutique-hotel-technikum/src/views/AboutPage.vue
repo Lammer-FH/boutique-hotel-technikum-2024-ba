@@ -30,7 +30,7 @@
             Das Boutique-Hotel-Technikum bietet seinen Gästen eine Vielzahl von Annehmlichkeiten und Aktivitäten. Dazu gehören:
             <ul>
               <li>Infinity-Pool mit atemberaubendem Blick</li>
-              <li>Spa-Bereich mit vielfältigen Anwendungen und Massagens</li>
+              <li>Spa-Bereich mit vielfältigen Anwendungen und Massagen</li>
               <li>Fitnesscenter mit modernsten Geräten</li>
               <li>Zwei Restaurants mit gehobener Küche</li>
               <li>Bar mit großer Auswahl an Cocktails und Getränken</li>
@@ -57,12 +57,11 @@
 </template>
 
 <script lang="ts">
-import {IonToolbar} from '@ionic/vue';
 import AboutPageCard from '@/components/AboutPageCard.vue';
 
 export default {
   components: {
-    IonToolbar, AboutPageCard
+    AboutPageCard
   }
 }
 </script>
