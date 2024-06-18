@@ -15,6 +15,7 @@ https://nodejs.org/en (current version: 20.13.0)
 go to /app folder
 
 ```
+npm install -g @ionic/cli
 cd app/boutique-hotel-technikum
 npm install
 ```
