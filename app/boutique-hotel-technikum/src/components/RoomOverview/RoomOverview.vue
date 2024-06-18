@@ -1,5 +1,5 @@
 <template>
-  <ion-grid>
+  <ion-grid v-if="room">
     <ion-row>
       <div class="container">
         <h1>{{ room.title }}</h1>
@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import {formatMoney} from "@/utils/Formatter";
-import RoomExtra, { Extra } from "@/components/RoomOverview/RoomExtra.vue";
+import RoomExtra from "@/components/RoomOverview/RoomExtra.vue";
 import { type Room } from "@/network/dtos/Room";
 import ImageDiaShow from "@/components/UI/ImageDiaShow.vue";
 import BoutiqueCalendar from "@/components/UI/BoutiqueCalendar.vue";
@@ -41,7 +41,7 @@ export default {
   props: {
     room: {
       type: Object as PropType<Room>,
-      required: true
+      required: false
     },
     showImages: {
       type: Boolean,
@@ -52,12 +52,12 @@ export default {
   computed: {
     imageObject() {
       return [{
-        src: `${import.meta.env.VITE_BACKEND_URL}/images/${this.room.id}.jpg`,
+        src: `${import.meta.env.VITE_BACKEND_URL}/images/${this.room!.id}.jpg`,
         alt: ''
       }];
     },
     sortedExtras() {
-      return this.room.extras.sort((first, second) => first.description < second.description ? -1 : 1);
+      return this.room!.extras.sort((first, second) => first.description < second.description ? -1 : 1);
     }
   }
 }

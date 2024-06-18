@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TheNavigation.vue'
 import {BookingPageNavigationGuard} from "@/views/BookingPage/BookingPage.vue";
-import {beforeEach} from "vitest";
 import {BookingOverviewPageNavigationGuard} from "@/views/BookingPage/BookingOverviewPage.vue";
+import {ConfirmationPageNavigationGuard} from "@/views/BookingPage/ConfirmationPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -67,5 +67,6 @@ const router = createRouter({
 })
 router.beforeEach(BookingPageNavigationGuard);
 router.beforeEach(BookingOverviewPageNavigationGuard);
+router.beforeEach(ConfirmationPageNavigationGuard);
 
 export default router

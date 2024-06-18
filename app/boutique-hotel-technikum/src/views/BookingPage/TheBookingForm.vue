@@ -1,7 +1,7 @@
 <template>
-  <ion-grid>
+  <ion-grid fixed>
     <ion-row>
-      <h1>Ihre Kontaktdaten</h1>
+      <h2>Ihre Kontaktdaten</h2>
     </ion-row>
 
     <BookingFormRow
@@ -12,7 +12,7 @@
           placeholder="Max"
           type="text"
           error-text="Bitte Vornamen eingeben!"
-          v-model="inputs.firstName"></ion-input>
+          v-model="data.firstName"></ion-input>
     </BookingFormRow>
 
     <BookingFormRow description="Nachname:">
@@ -21,7 +21,7 @@
           placeholder="Mustermann"
           type="text"
           error-text="Bitte Nachnamen eingeben!"
-          v-model="inputs.lastName"></ion-input>
+          v-model="data.lastName"></ion-input>
     </BookingFormRow>
 
     <BookingFormRow description="E-Mail:">
@@ -30,7 +30,7 @@
           placeholder="max.mustermann@email.com"
           type="email"
           error-text="Die E-Mail ist nicht korrekt oder nicht vorhanden!"
-          v-model="inputs.eMail"></ion-input>
+          v-model="data.eMail"></ion-input>
     </BookingFormRow>
 
     <BookingFormRow description="E-Mail wiederholen:">
@@ -39,25 +39,27 @@
           placeholder="max.mustermann@email.com"
           type="email"
           error-text="Die E-Mail stimmt nicht mit der vorherigen überein!"
-          v-model="inputs.eMailRepeat"></ion-input>
+          v-model="data.eMailRepeat"></ion-input>
     </BookingFormRow>
 
     <BookingFormRow
         description="Frühstück:">
-      <ion-radio-group v-model="inputs.breakfast" :allow-empty-selection="false">
+      <ion-radio-group v-model="data.breakfast" :allow-empty-selection="false">
         <ion-radio :value="true">Ja</ion-radio>
         <ion-radio :value="false" class="no">Nein</ion-radio>
       </ion-radio-group >
     </BookingFormRow>
 
-    <ion-row><h1>Adresse für Anfahrt (optional)</h1></ion-row>
+    <ion-row>
+      <h2>Adresse für Anfahrt (optional)</h2>
+    </ion-row>
     <BookingFormRow
       description="Straße:">
       <ion-input
         class="ion-touched"
         placeholder="Muster-Straße 10"
         type="text"
-        v-model="inputs.address.street"></ion-input>
+        v-model="data.address.street"></ion-input>
     </BookingFormRow>
 
     <BookingFormRow
@@ -66,7 +68,7 @@
           class="ion-touched"
           placeholder="1234"
           type="number"
-          v-model="inputs.address.postCode"></ion-input>
+          v-model="data.address.postCode"></ion-input>
     </BookingFormRow>
 
     <BookingFormRow
@@ -75,7 +77,7 @@
           class="ion-touched"
           placeholder="Musterstadt"
           type="text"
-          v-model="inputs.address.city"></ion-input>
+          v-model="data.address.city"></ion-input>
     </BookingFormRow>
 
     <BookingFormRow
@@ -84,7 +86,7 @@
           class="ion-touched"
           placeholder="Musterland"
           type="text"
-          v-model="inputs.address.country"></ion-input>
+          v-model="data.address.country"></ion-input>
     </BookingFormRow>
 
     <ion-row>
@@ -98,6 +100,7 @@
 <script lang="ts">
 import { IonInput, IonRadio, IonRadioGroup } from '@ionic/vue';
 import BookingFormRow from "@/views/BookingPage/BookingFormRow.vue";
+import { useCustomerFormData } from "@/stores/customerFormData";
 
 export default {
   components: {
@@ -115,27 +118,15 @@ export default {
         eMail: true,
         eMailRepeat: true
       },
-      inputs: {
-        firstName: "",
-        lastName: "",
-        eMail: "",
-        eMailRepeat: "",
-        breakfast: true,
-        address: {
-          street: "",
-          postCode: undefined as number | undefined,
-          city: "",
-          country: ""
-        }
-      }
+      data: useCustomerFormData()
     }
   },
   methods: {
     tryGoToOverview() {
-      this.valid.firstName = this.inputs.firstName.length > 0;
-      this.valid.lastName = this.inputs.lastName.length > 0;
-      this.valid.eMail = !!this.validateEmail(this.inputs.eMail);
-      this.valid.eMailRepeat = this.inputs.eMail === this.inputs.eMailRepeat;
+      this.valid.firstName = this.data.firstName.length > 0;
+      this.valid.lastName = this.data.lastName.length > 0;
+      this.valid.eMail = !!this.validateEmail(this.data.eMail);
+      this.valid.eMailRepeat = this.data.eMail === this.data.eMailRepeat;
 
       for (const valid of Object.values(this.valid)) {
         if (!valid) {
@@ -143,7 +134,7 @@ export default {
         }
       }
 
-      this.$emit("confirmed", this.inputs);
+      this.$emit("confirmed", this.data);
     },
     validateEmail(email: string) {
       return email.match(

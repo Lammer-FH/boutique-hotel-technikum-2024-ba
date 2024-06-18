@@ -40,7 +40,7 @@
 
         <IonRowCol v-if="availableRooms.state === ERoomSearchState.Loaded" v-for="room in availableRooms.rooms">
           <RoomOverview :room="room">
-            <ion-button router-link="/booking" router-direction="forward" @click="goToBooking(room)" expand="block">Buchen</ion-button>
+            <ion-button router-direction="forward" @click="goToBooking(room)" expand="block">Buchen</ion-button>
           </RoomOverview>
         </IonRowCol>
 
@@ -72,6 +72,7 @@ import {ERoomSearchState, useAvailableRoomsByPeriodStore} from "@/stores/availab
 import TheRoomPagination from "@/components/RoomOverview/TheRoomPagination.vue";
 import {Room} from "@/network/dtos/Room";
 import {useBookingStore} from "@/stores/booking";
+import router from "@/router";
 
 export default {
   components: {
@@ -108,14 +109,15 @@ export default {
     searchRooms() {
       if (this.periodInvalid) { return; }
 
-      this.availableRooms.arrival = this.searchArrival;
-      this.availableRooms.departure = this.searchDeparture;
+      this.availableRooms.setArrival(this.searchArrival);
+      this.availableRooms.setDeparture(this.searchDeparture);
       this.availableRooms.setCurrentPage(1);
     },
     goToBooking(room: Room) {
-      this.booking.arrival = new Date(this.availableRooms.arrival);
-      this.booking.departure = new Date(this.availableRooms.departure);
-      this.booking.room = room;
+      this.booking.setArrival(new Date(this.availableRooms.arrival));
+      this.booking.setDeparture(new Date(this.availableRooms.departure));
+      this.booking.setRoom(room);
+      router.push("/booking");
     }
   }
 }

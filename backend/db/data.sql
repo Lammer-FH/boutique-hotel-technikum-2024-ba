@@ -1,7 +1,7 @@
 USE boutique_hotel
 
 INSERT INTO hotel (name, address, latitude, longitude, directions, contact_phone_number) VALUES
-('Technikum Boutique Hotel', 'Platz 6, 1200 Wien, Österreich', 48.2391664, 16.3774409, 'Das Hotel befindet sich im Herzen von Wien und ist leicht mit öffentlichen Verkehrsmitteln zu erreichen. Die nächste U-Bahn-Station ist Dresdnerstrasse an der Linie U6.', '+43 1 1234567');
+('Technikum Boutique Hotel', 'Höchstädtplatz 6, 1200 Wien, Österreich', 48.2391664, 16.3774409, 'Das Hotel befindet sich im Herzen von Wien und ist leicht mit öffentlichen Verkehrsmitteln zu erreichen. Die nächste U-Bahn-Station ist Dresdnerstrasse an der Linie U6.', '+43 1 1234567');
 
 INSERT INTO room (hotel_id, room_number, title, description, bed_amount, price) VALUES
 (1, 201, 'Familien Deluxe', 'Ein geräumiges und modernes Zimmer mit kinderfreundlichen Annehmlichkeiten und zwei Queen-Betten.', 2, 150),

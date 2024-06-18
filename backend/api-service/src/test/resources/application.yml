@@ -1,12 +1,9 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/boutique_hotel
-    username: root
-    password: password
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    open-in-view: true
+    database: h2
+    datasource:
+      url: jdbc:h2:mem:AZ
+      driver-class-name: org.h2.Driver
+    h2:
+      console:
+        enabled: true

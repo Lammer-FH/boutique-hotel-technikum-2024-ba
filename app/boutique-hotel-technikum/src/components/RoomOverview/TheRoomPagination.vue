@@ -1,7 +1,7 @@
 <template>
   <div ref="container">
     <div ref="content">
-      <a @click="addPage(-1)">&#10094;&nbsp;</a>
+      <a @click="movePageBy(-1)">&#10094;&nbsp;</a>
       <ion-button v-if="cropBefore" shape="round" size="small">
         ...
       </ion-button>
@@ -16,7 +16,7 @@
       <ion-button v-if="cropAfter" shape="round" size="small">
         ...
       </ion-button>
-      <a @click="addPage(1)">&nbsp;&#10095;</a>
+      <a @click="movePageBy(1)">&nbsp;&#10095;</a>
     </div>
   </div>
 </template>
@@ -77,7 +77,7 @@ export default {
     }
   },
   methods: {
-    addPage(value: number) {
+    movePageBy(value: number) {
       let newPage = (this.pageObject.currentPage - 1 + value) % this.pageObject.pages
       if (newPage < 0) {
         newPage = newPage + this.pageObject.pages;

@@ -60,7 +60,7 @@
 <script lang="ts">
 import { IonToolbar } from '@ionic/vue';
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
-import {eMail, eMailHref, telephone, telephoneHref} from "../utils/ContactData";
+import {eMail, eMailHref, telephone, telephoneHref} from "@/utils/ContactData";
 export default {
   components: {
     BoutiqueHeader,

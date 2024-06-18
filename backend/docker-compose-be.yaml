@@ -1,0 +1,29 @@
+name: boutique-hotel-be
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      LANG: C.UTF-8
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./db/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./db/data.sql:/docker-entrypoint-initdb.d/2.sql"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+  api-service:
+    container_name: api-service
+    image: boutique-hotel-api-service:latest
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/boutique_hotel
+    ports:
+      - "8080:8080"
