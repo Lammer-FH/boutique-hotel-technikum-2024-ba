@@ -1,4 +1,4 @@
-import {AvailabilityResponse} from "@/network/AvailabilityResponse";
+import {AvailabilityResponse} from "@/network/dtos/AvailabilityResponse";
 import axios from "axios";
 
 export async function getAvailabilities(roomId: number, start: Date, end: Date) {
@@ -9,5 +9,5 @@ export async function getAvailabilities(roomId: number, start: Date, end: Date) 
                 start: start.toISOString().slice(0, 10),
                 end: end.toISOString().slice(0, 10)
             }
-        })).data
+        })).data;
 }

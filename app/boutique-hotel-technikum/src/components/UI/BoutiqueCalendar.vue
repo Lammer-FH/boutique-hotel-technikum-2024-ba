@@ -42,7 +42,7 @@
       <div class="center">
         <div class="background">
           <div>Ein Fehler beim Laden der Verfügbarkeit ist aufgetreten, bitte versuche es später erneut!</div>
-          <ion-button @click="$emit('finished')">Zurück</ion-button>
+          <ion-button @click="$emit('finished')" expand="block">Zurück</ion-button>
         </div>
       </div>
     </ion-content>
@@ -53,7 +53,7 @@
 <script lang="ts">
 import {IonButtons, IonDatetime, IonFooter, IonText} from "@ionic/vue";
 import {getAvailabilities} from "@/network/getAvailabilities";
-import {DatePeriod} from "@/network/Booking";
+import {DatePeriod} from "@/network/dtos/Booking";
 import {periodToDatePeriod, isBooked} from "@/utils/periodHelper";
 
 export default {
@@ -103,7 +103,7 @@ export default {
         .then(availabilityResponse => {
           this.availabilities = availabilityResponse.booked
               .map(p => periodToDatePeriod(p))
-              .sort((a, b) => a < b ? -1 : 1);
+              .sort((a, b) => a.start < b.start ? -1 : 1);
           this.state = "loaded";
         })
         .catch(e => {

@@ -10,14 +10,8 @@
 
 https://nodejs.org/en (current version: 20.13.0)
 
-#### Install Ionic CLI
-
-```
-npm install -g @ionic/cli
-```
 
 #### Install NPM packages
-
 go to /app folder
 
 ```
@@ -25,10 +19,12 @@ cd app/boutique-hotel-technikum
 npm install
 ```
 
-#### Run Ionic app
+#### Set environment variables
+Copy ```.env.development.example``` to ```.env.development``` and add your Google API Key as the VITE_API_KEY=[YOUR_KEY]!
 
+#### Run Ionic app
 ```
-ionic serve
+npm run dev
 ```
 
 ### Backend

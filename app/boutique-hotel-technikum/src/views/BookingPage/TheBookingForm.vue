@@ -45,13 +45,52 @@
     <BookingFormRow
         description="Frühstück:">
       <ion-radio-group v-model="inputs.breakfast" :allow-empty-selection="false">
-        <ion-radio value="yes">Ja</ion-radio>
-        <ion-radio value="no" class="no">Nein</ion-radio>
+        <ion-radio :value="true">Ja</ion-radio>
+        <ion-radio :value="false" class="no">Nein</ion-radio>
       </ion-radio-group >
     </BookingFormRow>
 
+    <ion-row><h1>Adresse für Anfahrt (optional)</h1></ion-row>
+    <BookingFormRow
+      description="Straße:">
+      <ion-input
+        class="ion-touched"
+        placeholder="Muster-Straße 10"
+        type="text"
+        v-model="inputs.address.street"></ion-input>
+    </BookingFormRow>
+
+    <BookingFormRow
+        description="PLZ:">
+      <ion-input
+          class="ion-touched"
+          placeholder="1234"
+          type="number"
+          v-model="inputs.address.postCode"></ion-input>
+    </BookingFormRow>
+
+    <BookingFormRow
+        description="Stadt:">
+      <ion-input
+          class="ion-touched"
+          placeholder="Musterstadt"
+          type="text"
+          v-model="inputs.address.city"></ion-input>
+    </BookingFormRow>
+
+    <BookingFormRow
+        description="Land:">
+      <ion-input
+          class="ion-touched"
+          placeholder="Musterland"
+          type="text"
+          v-model="inputs.address.country"></ion-input>
+    </BookingFormRow>
+
     <ion-row>
-      <ion-button @click="tryGoToOverview">Weiter</ion-button>
+      <ion-col>
+        <ion-button @click="tryGoToOverview" expand="block">Weiter</ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </template>
@@ -81,7 +120,13 @@ export default {
         lastName: "",
         eMail: "",
         eMailRepeat: "",
-        breakfast: "yes"
+        breakfast: true,
+        address: {
+          street: "",
+          postCode: undefined as number | undefined,
+          city: "",
+          country: ""
+        }
       }
     }
   },
@@ -118,9 +163,5 @@ ion-input {
 
 ion-radio.no {
   margin-left: 1rem;
-}
-
-ion-button {
-  width: 100%;
 }
 </style>

@@ -2,7 +2,7 @@
   <ion-page>
     <ion-content v-if="availableRooms.loaded">
       <RoomOverview v-for="room in availableRooms.rooms" :room="room">
-        <ion-button @click="showCalendarFor = room.id">Verfügbarkeit prüfen</ion-button>
+        <ion-button @click="showCalendarFor = room.id" expand="block">Verfügbarkeit prüfen</ion-button>
       </RoomOverview>
       <BoutiqueCalendar v-if="showCalendarFor" :room-id="showCalendarFor" @finished="showCalendarFor = undefined"/>
     </ion-content>
@@ -47,9 +47,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-ion-button {
-  width: 100%;
-}
-</style>

@@ -1,5 +1,6 @@
 <template>
   <ion-page>
+
     <ion-header>
       <ion-grid>
         <ion-row class="ion-justify-content-end">
@@ -18,19 +19,14 @@
 
     <ion-content>
       <ion-grid>
-        <ion-row>
-          <ion-text>Anreise: <span>{{ booking.prettyArrival }}</span></ion-text>
-        </ion-row>
-        <ion-row>
-          <ion-text>Abreise: <span>{{ booking.prettyDeparture }}</span></ion-text>
-        </ion-row>
+        <BookingPeriod/>
 
         <ion-row v-if="booking.room">
           <RoomOverview :room="booking.room"/>
         </ion-row>
 
         <ion-row class="ion-justify-content-center">
-          <h1>{{ `${overnightStays} ${overnightStays === 1 ? "Nacht" : "Nächte"}: ${formatMoney(overnightStays * booking.room!.price)}` }}</h1>
+          <h1>{{ priceText }}</h1>
         </ion-row>
 
         <ContactData/>
@@ -40,22 +36,26 @@
         </ion-button>
       </ion-grid>
     </ion-content>
+
   </ion-page>
 </template>
 
 <script lang="ts">
 import {useIonRouter} from "@ionic/vue";
-import {useBookingStore} from "@/stores/booking";
+import {EBookingState, useBookingStore} from "@/stores/booking";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import {formatMoney} from "@/utils/Formatter";
 import {RouteLocationNormalized} from "vue-router";
 import bookRoom from "@/network/bookRoom";
 import ContactData from "@/components/ContactData.vue";
+import BookingPeriod from "@/components/BookingPeriod.vue";
+import {useCustomerStore} from "@/stores/customer";
 
 export function BookingOverviewPageNavigationGuard(to: RouteLocationNormalized) {
   const booking = useBookingStore();
+  const customer = useCustomerStore();
 
-  if (to.fullPath === "/booking-overview" && !booking.isBookingValid) {
+  if (to.fullPath === "/booking-overview" && (!booking.isRoomValid || !customer.isValid)) {
     return "/search/period";
   }
 
@@ -63,10 +63,11 @@ export function BookingOverviewPageNavigationGuard(to: RouteLocationNormalized) 
 }
 
 export default {
-  components: {ContactData, RoomOverview},
+  components: {BookingPeriod, ContactData, RoomOverview},
   data() {
     return {
       booking: useBookingStore(),
+      customer: useCustomerStore(),
       router: useIonRouter(),
       booked: false
     }
@@ -74,18 +75,21 @@ export default {
   computed: {
     overnightStays() {
       return this.booking.departure!.getDate() - this.booking.arrival!.getDate();
+    },
+    priceText() {
+      const total = this.overnightStays * this.booking.room!.price;
+      return `${this.overnightStays} ${this.overnightStays === 1 ? "Nacht" : "Nächte"}: ${formatMoney(total)}`
     }
   },
   methods: {
-    formatMoney,
     async tryBooking() {
       try {
         await bookRoom(
             this.booking!.room!.id,
             {
-              firstName: this.booking.firstName,
-              secondName: this.booking.lastName,
-              email: this.booking.eMail,
+              firstName: this.customer.firstName,
+              secondName: this.customer.lastName,
+              email: this.customer.eMail,
               birthDate: "1995-01-01"
             },
             this.booking.breakfast,
@@ -94,7 +98,7 @@ export default {
               end: this.booking.departure!.toISOString().slice(0, 10)
             });
 
-        this.booking.status = "booked";
+        this.booking.setState(EBookingState.BOOKED);
         this.router.replace("/confirmation");
       } catch (e) {
         console.error(e);

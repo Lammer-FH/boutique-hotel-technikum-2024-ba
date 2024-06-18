@@ -1,16 +1,18 @@
 import {defineStore} from "pinia";
-import {Room} from "@/network/Room";
+import {Room} from "@/network/dtos/Room";
+
+export enum EBookingState {
+    BOOKING,
+    BOOKED
+}
 
 export const useBookingStore = defineStore({
     id: 'booking',
     state: () => ({
-        status: "booking" as "booking" | "booked",
+        state: EBookingState.BOOKING,
         arrival: undefined as Date | undefined,
         departure: undefined as Date | undefined,
         room: undefined as Room | undefined,
-        firstName: "",
-        lastName: "",
-        eMail: "",
         breakfast: true
     }),
     getters: {
@@ -22,9 +24,23 @@ export const useBookingStore = defineStore({
         },
         isRoomValid(state): boolean {
             return !!(state.arrival && state.departure && state.room);
+        }
+    },
+    actions: {
+        setState(state: EBookingState) {
+            this.state = state;
         },
-        isBookingValid(state): boolean {
-            return this.isRoomValid && !!(state.firstName && state.lastName && state.eMail);
+        setArrival(date: Date) {
+            this.arrival = date;
+        },
+        setDeparture(date: Date) {
+            this.departure = date;
+        },
+        setRoom(room: Room) {
+            this.room = room;
+        },
+        setBreakfast(breakfast: boolean) {
+            this.breakfast = breakfast;
         }
     }
 })

@@ -35,12 +35,12 @@
         </ion-row>
 
         <IonRowCol>
-            <ion-button @click="searchRooms">Suchen</ion-button>
+            <ion-button @click="searchRooms" expand="block">Suchen</ion-button>
         </IonRowCol>
 
         <IonRowCol v-if="availableRooms.state === ERoomSearchState.Loaded" v-for="room in availableRooms.rooms">
           <RoomOverview :room="room">
-            <ion-button router-link="/booking" router-direction="forward" @click="goToBooking(room)">Buchen</ion-button>
+            <ion-button router-link="/booking" router-direction="forward" @click="goToBooking(room)" expand="block">Buchen</ion-button>
           </RoomOverview>
         </IonRowCol>
 
@@ -70,7 +70,7 @@ import {IonDatetime, useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import {ERoomSearchState, useAvailableRoomsByPeriodStore} from "@/stores/availableRoomByPeriod";
 import TheRoomPagination from "@/components/RoomOverview/TheRoomPagination.vue";
-import {Room} from "@/network/Room";
+import {Room} from "@/network/dtos/Room";
 import {useBookingStore} from "@/stores/booking";
 
 export default {
@@ -122,10 +122,6 @@ export default {
 </script>
 
 <style scoped>
-ion-button {
-  width: 100%;
-}
-
 ion-col {
   display: flex;
   align-items: center;

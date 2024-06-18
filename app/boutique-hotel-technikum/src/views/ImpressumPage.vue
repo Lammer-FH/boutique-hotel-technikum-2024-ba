@@ -14,8 +14,8 @@
             <h1>Boutique Hotel Technikum</h1>
             <ul>
               <li><b>Anschrift:</b><br>Hotelgasse 1, 1030 Wien, Österreich</li>
-              <li><b>Telefon:</b><br><a href="tel:0431123456789">+43 1 123 456 789</a></li>
-              <li><b>E-Mail:</b><br><a href="mailto:boutique-hotel@technikum-wien.at">boutique-hotel@technikum-wien.at</a></li>
+              <li><b>Telefon:</b><br><a :href="telephoneHref()">{{ telephone() }}</a></li>
+              <li><b>E-Mail:</b><br><a :href="eMailHref()">{{ eMail() }}</a></li>
               <li><b>Website:</b><br><a href="https://boutique-hotel.at">boutique-hotel.at</a></li>
               <li><b>Geschäftsführer:</b><br>Mag. Dr. Bou Tique</li>
               <li><b>Unternehmensgegenstand:</b><br>Beherbergungsbetrieb</li>
@@ -60,10 +60,17 @@
 <script lang="ts">
 import { IonToolbar } from '@ionic/vue';
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
+import {eMail, eMailHref, telephone, telephoneHref} from "../utils/ContactData";
 export default {
   components: {
     BoutiqueHeader,
     IonToolbar
+  },
+  methods: {
+    eMailHref() { return eMailHref },
+    telephoneHref() { return telephoneHref },
+    eMail() { return eMail },
+    telephone() { return telephone }
   }
 }
 </script>
