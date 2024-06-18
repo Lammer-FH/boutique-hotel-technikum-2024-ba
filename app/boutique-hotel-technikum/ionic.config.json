@@ -1,5 +1,7 @@
 {
   "name": "boutique-hotel-technikum",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "vue-vite"
 }
