@@ -35,7 +35,7 @@ public class BookingsServiceImpl implements BookingsService {
         val period = booking.getReservationPeriod();
 
         // Check if start is before end
-        if (period.getStart().isAfter(period.getEnd())) {
+        if (!period.getStart().isBefore(period.getEnd())) {
             logger.info("Start is not before end, start: {}, end: {} ", period.getStart(), period.getEnd());
             return ResponseEntity.badRequest().body(null);
         }

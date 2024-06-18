@@ -52,7 +52,7 @@ export default {
   computed: {
     imageObject() {
       return [{
-        src: `${import.meta.env.VITE_BACKEND_URL}/images/${this.room!.id}.jpg`,
+        src: `${import.meta.env.VITE_BACKEND_URL}/images/rooms/${this.room!.id}.jpg`,
         alt: ''
       }];
     },
