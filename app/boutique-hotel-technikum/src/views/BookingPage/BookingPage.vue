@@ -13,7 +13,7 @@
 
     <ion-content>
       <ion-grid fixed>
-        <BookingPeriod/>
+        <BookingPeriod :arrival="booking.prettyArrival ?? ''" :departure="booking.prettyDeparture ?? ''"/>
         <ion-row>
           <RoomOverview :room="booking.room!"/>
         </ion-row>
@@ -34,6 +34,7 @@ import BookingPeriod from "@/components/BookingPeriod.vue";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
 export default {
+  name: "Booking",
   components: {BookingPeriod, RoomOverview, TheBookingForm, BoutiqueHeader},
   data() {
     return {

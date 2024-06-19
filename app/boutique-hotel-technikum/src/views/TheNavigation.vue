@@ -32,6 +32,7 @@ import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonRouterOutlet } from '@io
 import { home, informationCircle, help, search } from 'ionicons/icons';
 
 export default {
+  name: "Navigation",
   data() {
     return {
       icons: {

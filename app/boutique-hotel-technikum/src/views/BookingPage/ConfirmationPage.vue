@@ -6,10 +6,10 @@
       <ion-content>
         <ion-grid fixed>
           <ion-row>
-            <ion-col><h2>Vielen dank für Ihre Reservierung, wir haben Ihre Buchung erhalten!</h2></ion-col>
+            <ion-col><h2>Vielen Dank für Ihre Reservierung, wir haben Ihre Buchung erhalten!</h2></ion-col>
           </ion-row>
 
-          <BookingPeriod/>
+          <BookingPeriod :arrival="booking.prettyArrival ?? ''" :departure="booking.prettyDeparture ?? ''"/>
 
           <ion-row>
             <ion-col size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
@@ -82,6 +82,7 @@ import IonRowCol from "@/components/UI/IonRowCol.vue";
 import {useIonRouter} from "@ionic/vue";
 
 export default {
+  name: "Confirmation",
   components: {IonRowCol, ContactData, RoomOverview, BookingPeriod, BoutiqueHeader},
   data() {
     return {
@@ -113,6 +114,7 @@ export default {
 .bold {
   font-weight: bold;
 }
+
 @media print {
   .tab-bar, .app-header, .embedded-map {
     display: none !important;

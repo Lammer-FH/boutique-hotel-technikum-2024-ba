@@ -76,6 +76,7 @@ import {useBookingStore} from "@/stores/booking";
 import router from "@/router";
 
 export default {
+  name: "SearchPeriod",
   components: {
     RoomOverview,
     BoutiqueHeader,

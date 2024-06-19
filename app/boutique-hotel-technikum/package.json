@@ -1,7 +1,7 @@
 {
   "name": "boutique-hotel-technikum",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,13 +12,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@ionic/vue": "^8.0.0",
-    "@ionic/vue-router": "^8.0.0",
+    "@ionic/vue": "^8.2.2",
+    "@ionic/vue-router": "^8.2.2",
     "axios": "^1.7.2",
     "ionicons": "^7.0.0",
     "pinia": "^2.1.7",
-    "vue": "^3.3.0",
-    "vue-router": "^4.2.0"
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^5.0.0",

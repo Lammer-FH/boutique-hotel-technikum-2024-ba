@@ -6,6 +6,7 @@
           <ion-tab-button tab="period" href="/search/period">
             <ion-label>Zeitraum</ion-label>
           </ion-tab-button>
+
           <ion-tab-button tab="room" href="/search/room">
             <ion-label>Zimmer</ion-label>
           </ion-tab-button>
@@ -21,6 +22,7 @@
 import { IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, IonTabBar } from '@ionic/vue';
 
 export default {
+  name: "SearchNavigation",
   components: {
     IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, IonTabBar
   }

@@ -1,23 +1,26 @@
 <template>
   <ion-row>
     <ion-col>
-      <ion-text>Anreise: <span>{{ booking.prettyArrival }}</span></ion-text>
+      <ion-text>Anreise: <span>{{ arrival }}</span></ion-text>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <ion-text>Abreise: <span>{{ booking.prettyDeparture }}</span></ion-text>
+      <ion-text>Abreise: <span>{{ departure }}</span></ion-text>
     </ion-col>
   </ion-row>
 </template>
 
 <script lang="ts">
-import {useBookingStore} from "@/stores/booking";
-
 export default {
-  data() {
-    return {
-      booking: useBookingStore()
+  props: {
+    arrival: {
+      type: String,
+      required: true
+    },
+    departure: {
+      type: String,
+      required: true
     }
   }
 }

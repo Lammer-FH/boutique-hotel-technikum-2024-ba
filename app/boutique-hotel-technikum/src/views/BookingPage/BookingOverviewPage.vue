@@ -13,9 +13,9 @@
 
     <ion-content>
       <ion-grid fixed>
-        <BookingPeriod/>
+        <BookingPeriod :arrival="booking.prettyArrival ?? ''" :departure="booking.prettyDeparture ?? ''"/>
 
-        <ion-row v-if="booking.room">
+        <ion-row>
           <RoomOverview :room="booking.room"/>
         </ion-row>
 
@@ -46,6 +46,7 @@ import {useCustomerStore} from "@/stores/customer";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
 export default {
+  name: "BookingOverview",
   components: {BookingPeriod, ContactData, RoomOverview, BoutiqueHeader},
   data() {
     return {
@@ -57,10 +58,11 @@ export default {
   },
   computed: {
     overnightStays() {
-      return this.booking.departure!.getDate() - this.booking.arrival!.getDate();
+      if (!this.booking.departure || !this.booking.arrival) { return 0; }
+      return this.booking.departure.getDate() - this.booking.arrival.getDate();
     },
     priceText() {
-      const total = this.overnightStays * this.booking.room!.price;
+      const total = this.overnightStays * (this.booking.room?.price ?? 0);
       return `${this.overnightStays} ${this.overnightStays === 1 ? "Nacht" : "Nächte"}: ${formatMoney(total)}`
     }
   },
@@ -89,7 +91,7 @@ export default {
           this.booking.setState(EBookingState.ERROR);
         }
       }
-      this.router.replace("/confirmation");
+      this.router.push("/confirmation");
     }
   }
 }

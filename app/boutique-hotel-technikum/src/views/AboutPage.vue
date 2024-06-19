@@ -60,6 +60,7 @@
 import AboutPageCard from '@/components/AboutPageCard.vue';
 
 export default {
+  name: "About",
   components: {
     AboutPageCard
   }

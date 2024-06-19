@@ -41,6 +41,7 @@ import HomePageCardText from "@/views/HomePage/HomePageCards";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
 export default {
+  name: "Home",
   data() {
     return {
       homeImage,
