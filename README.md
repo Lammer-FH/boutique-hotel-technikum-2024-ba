@@ -15,6 +15,7 @@ https://nodejs.org/en (current version: 20.13.0)
 go to /app folder
 
 ```
+npm install -g @ionic/cli
 cd app/boutique-hotel-technikum
 npm install
 ```
@@ -24,14 +25,14 @@ Copy ```.env.development.example``` to ```.env.development``` and add your Googl
 
 #### Run Ionic app
 ```
-npm run dev
+ionic serve
 ```
 
 ### Backend (Dev)
 
 #### Install
 
-##### Install Java 22
+##### Install Java 21
 
 ##### Install Maven
 
