@@ -13,7 +13,7 @@
 
     <ion-content>
       <ion-grid fixed>
-        <BookingPeriod/>
+        <BookingPeriod :arrival="booking.prettyArrival ?? ''" :departure="booking.prettyDeparture ?? ''"/>
         <ion-row>
           <RoomOverview :room="booking.room!"/>
         </ion-row>
@@ -28,23 +28,13 @@ import {useBookingStore} from "@/stores/booking";
 import {useIonRouter} from "@ionic/vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import TheBookingForm from "@/views/BookingPage/TheBookingForm.vue";
-import {RouteLocationNormalized} from "vue-router";
 import {Address} from "@/stores/dataStructures/CustomerInfo";
 import {useCustomerStore} from "@/stores/customer";
 import BookingPeriod from "@/components/BookingPeriod.vue";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
-export function BookingPageNavigationGuard(to: RouteLocationNormalized) {
-  const booking = useBookingStore();
-
-  if (to.fullPath === "/booking" && !booking.isRoomValid) {
-    return "/search/period";
-  }
-
-  return true;
-}
-
 export default {
+  name: "BookingPage",
   components: {BookingPeriod, RoomOverview, TheBookingForm, BoutiqueHeader},
   data() {
     return {

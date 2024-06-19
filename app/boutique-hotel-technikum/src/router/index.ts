@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
-import { RouteRecordRaw } from 'vue-router';
+import {createMemoryHistory, NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw} from 'vue-router';
 import TabsPage from '../views/TheNavigation.vue'
-import {BookingPageNavigationGuard} from "@/views/BookingPage/BookingPage.vue";
-import {BookingOverviewPageNavigationGuard} from "@/views/BookingPage/BookingOverviewPage.vue";
-import {ConfirmationPageNavigationGuard} from "@/views/BookingPage/ConfirmationPage.vue";
+import {useBookingStore} from "@/stores/booking";
+import {useCustomerStore} from "@/stores/customer";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'search',
-        redirect: 'search/room',
+        redirect: 'search/period',
         component: () => import('@/views/TheSearchNavigation.vue'),
         children: [
           {
@@ -39,15 +38,18 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'booking',
-        component: () => import('@/views/BookingPage/BookingPage.vue')
+        component: () => import('@/views/BookingPage/BookingPage.vue'),
+        meta: { needsValidRoom: true, to: "/search/period" }
       },
       {
         path: 'booking-overview',
-        component: () => import('@/views/BookingPage/BookingOverviewPage.vue')
+        component: () => import('@/views/BookingPage/BookingOverviewPage.vue'),
+        meta: { needsValidRoom: true, needsValidCustomer: true, to: "/search/period" }
       },
       {
         path: 'confirmation',
-        component: () => import('@/views/BookingPage/ConfirmationPage.vue')
+        component: () => import('@/views/BookingPage/ConfirmationPage.vue'),
+        meta: { needsValidRoom: true, needsValidCustomer: true, to: "/search/period" }
       },
       {
         path: 'about',
@@ -56,6 +58,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'impressum',
         component: () => import('@/views/ImpressumPage.vue')
+      },
+      {
+        path: '/:notFound(.*)',
+        redirect: '/home'
       }
     ]
   }
@@ -64,9 +70,22 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
-})
-router.beforeEach(BookingPageNavigationGuard);
-router.beforeEach(BookingOverviewPageNavigationGuard);
-router.beforeEach(ConfirmationPageNavigationGuard);
+});
+
+router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+  const booking = useBookingStore();
+  const customer = useCustomerStore();
+
+  if (to.meta.needsValidRoom && !booking.isRoomValid) {
+    next(to.meta.to ?? "/home");
+    return;
+  }
+  if (to.meta.needsValidCustomer && !customer.isValid) {
+    next(to.meta.to ?? "/home");
+    return;
+  }
+
+  next();
+});
 
 export default router

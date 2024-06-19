@@ -4,6 +4,7 @@ import router from './router';
 
 import {
   IonButton,
+  IonButtons,
   IonCol,
   IonContent,
   IonFooter,
@@ -70,6 +71,7 @@ app.component("IonPage", IonPage)
     .component("IonCol", IonCol)
     .component("IonText", IonText)
     .component("IonButton", IonButton)
+    .component("IonButtons", IonButtons)
     .component("IonRowCol", IonRowCol)
     .component("BoutiqueHeader", BoutiqueHeader);
 

@@ -13,9 +13,9 @@
 
     <ion-content>
       <ion-grid fixed>
-        <BookingPeriod/>
+        <BookingPeriod :arrival="booking.prettyArrival ?? ''" :departure="booking.prettyDeparture ?? ''"/>
 
-        <ion-row v-if="booking.room">
+        <ion-row>
           <RoomOverview :room="booking.room"/>
         </ion-row>
 
@@ -30,7 +30,6 @@
         </ion-button>
       </ion-grid>
     </ion-content>
-
   </ion-page>
 </template>
 
@@ -39,25 +38,14 @@ import {useIonRouter} from "@ionic/vue";
 import {EBookingState, useBookingStore} from "@/stores/booking";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import {formatMoney} from "@/utils/Formatter";
-import {RouteLocationNormalized} from "vue-router";
 import bookRoom from "@/network/bookRoom";
 import ContactData from "@/components/ContactData.vue";
 import BookingPeriod from "@/components/BookingPeriod.vue";
 import {useCustomerStore} from "@/stores/customer";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
-export function BookingOverviewPageNavigationGuard(to: RouteLocationNormalized) {
-  const booking = useBookingStore();
-  const customer = useCustomerStore();
-
-  if (to.fullPath === "/booking-overview" && (!booking.isRoomValid || !customer.isValid)) {
-    return "/search/period";
-  }
-
-  return true;
-}
-
 export default {
+  name: "BookingOverviewPage",
   components: {BookingPeriod, ContactData, RoomOverview, BoutiqueHeader},
   data() {
     return {
@@ -69,10 +57,11 @@ export default {
   },
   computed: {
     overnightStays() {
-      return this.booking.departure!.getDate() - this.booking.arrival!.getDate();
+      if (!this.booking.departure || !this.booking.arrival) { return 0; }
+      return this.booking.departure.getDate() - this.booking.arrival.getDate();
     },
     priceText() {
-      const total = this.overnightStays * this.booking.room!.price;
+      const total = this.overnightStays * (this.booking.room?.price ?? 0);
       return `${this.overnightStays} ${this.overnightStays === 1 ? "Nacht" : "Nächte"}: ${formatMoney(total)}`
     }
   },
@@ -101,7 +90,7 @@ export default {
           this.booking.setState(EBookingState.ERROR);
         }
       }
-      this.router.replace("/confirmation");
+      this.router.push("/confirmation");
     }
   }
 }

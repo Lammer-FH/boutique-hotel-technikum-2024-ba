@@ -6,10 +6,10 @@
       <ion-content>
         <ion-grid fixed>
           <ion-row>
-            <ion-col><h2>Vielen dank für Ihre Reservierung, wir haben Ihre Buchung erhalten!</h2></ion-col>
+            <ion-col><h2>Vielen Dank für Ihre Reservierung, wir haben Ihre Buchung erhalten!</h2></ion-col>
           </ion-row>
 
-          <BookingPeriod/>
+          <BookingPeriod :arrival="booking.prettyArrival ?? ''" :departure="booking.prettyDeparture ?? ''"/>
 
           <ion-row>
             <ion-col size="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
@@ -30,7 +30,7 @@
               <template v-if="customer.hasAnyAddressInfo">
                 <ion-row>
                   <ion-col>
-                    <iframe 
+                    <iframe
                         class="embedded-map"
                         width="100%"
                         height="250"
@@ -47,15 +47,13 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <span class="bold">Telefon:&nbsp;</span><a
-                    :href="telephoneHref()">{{ booking.room?.hotel.contactPhoneNumber }}</a>
+                  <span class="bold">Telefon:&nbsp;</span><a :href="telephoneHref()">{{ booking.room?.hotel.contactPhoneNumber }}</a>
                 </ion-col>
               </ion-row>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-content>
-
     </template>
 
     <template v-if="booking.state === EBookingState.ROOM_NOT_AVAILABLE_ERROR">
@@ -78,29 +76,20 @@ import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 import BookingPeriod from "@/components/BookingPeriod.vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import ContactData from "@/components/ContactData.vue";
-import {eMail, telephone} from "@/utils/ContactData";
+import {eMail} from "@/utils/ContactData";
 import {useCustomerStore} from "@/stores/customer";
-import {RouteLocationNormalized} from "vue-router";
 import IonRowCol from "@/components/UI/IonRowCol.vue";
 import {useIonRouter} from "@ionic/vue";
-
-export function ConfirmationPageNavigationGuard(to: RouteLocationNormalized) {
-  const booking = useBookingStore();
-  const customer = useCustomerStore();
-
-  if (to.fullPath === "/confirmation" && (!booking.isRoomValid || !customer.isValid)) {
-    return "/search/period";
-  }
-
-  return true;
-}
+import {useAvailableRoomsByPeriodStore} from "@/stores/availableRoomByPeriod";
 
 export default {
+  name: "ConfirmationPage",
   components: {IonRowCol, ContactData, RoomOverview, BookingPeriod, BoutiqueHeader},
   data() {
     return {
       booking: useBookingStore(),
       customer: useCustomerStore(),
+      availableRooms: useAvailableRoomsByPeriodStore(),
       router: useIonRouter()
     }
   },
@@ -116,15 +105,11 @@ export default {
     telephoneHref() {
       return "tel:" + this.booking.room?.hotel.contactPhoneNumber;
     },
-    telephone() {
-      return telephone
-    },
-    eMail() {
-      return eMail
-    }
+    eMail() { return eMail }
   },
   beforeRouteLeave() {
     this.booking.$reset();
+    this.availableRooms.$reset();
   }
 }
 </script>

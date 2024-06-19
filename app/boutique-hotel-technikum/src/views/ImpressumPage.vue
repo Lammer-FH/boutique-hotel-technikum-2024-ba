@@ -61,7 +61,9 @@
 import { IonToolbar } from '@ionic/vue';
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 import {eMail, eMailHref, telephone, telephoneHref} from "@/utils/ContactData";
+
 export default {
+  name: "ImpressumPage",
   components: {
     BoutiqueHeader,
     IonToolbar
