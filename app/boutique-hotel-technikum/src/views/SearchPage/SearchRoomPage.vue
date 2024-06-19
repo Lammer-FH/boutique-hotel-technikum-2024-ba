@@ -28,7 +28,7 @@ import BoutiqueCalendar from "@/components/UI/BoutiqueCalendar.vue";
 import {useAvailableRoomsStore} from "@/stores/availableRooms";
 
 export default {
-  name: "SearchRoom",
+  name: "SearchRoomPage",
   components: {
     BoutiqueCalendar,
     TheRoomPagination,

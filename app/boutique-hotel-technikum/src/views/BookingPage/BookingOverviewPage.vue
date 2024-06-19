@@ -38,7 +38,6 @@ import {useIonRouter} from "@ionic/vue";
 import {EBookingState, useBookingStore} from "@/stores/booking";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import {formatMoney} from "@/utils/Formatter";
-import {RouteLocationNormalized} from "vue-router";
 import bookRoom from "@/network/bookRoom";
 import ContactData from "@/components/ContactData.vue";
 import BookingPeriod from "@/components/BookingPeriod.vue";
@@ -46,7 +45,7 @@ import {useCustomerStore} from "@/stores/customer";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
 export default {
-  name: "BookingOverview",
+  name: "BookingOverviewPage",
   components: {BookingPeriod, ContactData, RoomOverview, BoutiqueHeader},
   data() {
     return {

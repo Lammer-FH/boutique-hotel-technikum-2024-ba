@@ -34,7 +34,7 @@ import BookingPeriod from "@/components/BookingPeriod.vue";
 import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 
 export default {
-  name: "Booking",
+  name: "BookingPage",
   components: {BookingPeriod, RoomOverview, TheBookingForm, BoutiqueHeader},
   data() {
     return {

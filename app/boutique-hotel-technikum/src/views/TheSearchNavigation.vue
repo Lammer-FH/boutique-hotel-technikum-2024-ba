@@ -22,7 +22,7 @@
 import { IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, IonTabBar } from '@ionic/vue';
 
 export default {
-  name: "SearchNavigation",
+  name: "TheSearchNavigation",
   components: {
     IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, IonTabBar
   }

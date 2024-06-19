@@ -76,18 +76,20 @@ import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 import BookingPeriod from "@/components/BookingPeriod.vue";
 import RoomOverview from "@/components/RoomOverview/RoomOverview.vue";
 import ContactData from "@/components/ContactData.vue";
-import {eMail, telephone} from "@/utils/ContactData";
+import {eMail} from "@/utils/ContactData";
 import {useCustomerStore} from "@/stores/customer";
 import IonRowCol from "@/components/UI/IonRowCol.vue";
 import {useIonRouter} from "@ionic/vue";
+import {useAvailableRoomsByPeriodStore} from "@/stores/availableRoomByPeriod";
 
 export default {
-  name: "Confirmation",
+  name: "ConfirmationPage",
   components: {IonRowCol, ContactData, RoomOverview, BookingPeriod, BoutiqueHeader},
   data() {
     return {
       booking: useBookingStore(),
       customer: useCustomerStore(),
+      availableRooms: useAvailableRoomsByPeriodStore(),
       router: useIonRouter()
     }
   },
@@ -107,6 +109,7 @@ export default {
   },
   beforeRouteLeave() {
     this.booking.$reset();
+    this.availableRooms.$reset();
   }
 }
 </script>

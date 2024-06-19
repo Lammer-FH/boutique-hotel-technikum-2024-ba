@@ -63,7 +63,7 @@ import BoutiqueHeader from "@/components/UI/TheHeader.vue";
 import {eMail, eMailHref, telephone, telephoneHref} from "@/utils/ContactData";
 
 export default {
-  name: "Impressum",
+  name: "ImpressumPage",
   components: {
     BoutiqueHeader,
     IonToolbar
